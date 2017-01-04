@@ -17,24 +17,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let sourceFile = try? AKAudioFile(readFileName: "Sitting.wav", baseDir: .resources)
-        
-        //let IRFile = Bundle.main.path(forResource: "IR", ofType: "wav")
-        print("Loaded Files")
         let urlOfIR = Bundle.main.url(forResource: "IR", withExtension: "wav")!
-        print("Created URL")
         let player = sourceFile?.player
-        print("Created Player")
         
         convolvedOutput = AKConvolution(player!, impulseResponseFileURL: urlOfIR)
-        //let oscillator = AKOscillator()
-        print("Created convolution")
-       
         
         AudioKit.output = convolvedOutput!
-        print("Hooking up to output")
-        
         AudioKit.start()
-        print("Playing")
+       
         convolvedOutput!.start()
         player!.start()
         //player!.start()
