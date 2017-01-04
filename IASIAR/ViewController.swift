@@ -12,19 +12,32 @@ import AudioKit
 class ViewController: UIViewController {
     
     @IBOutlet var processButton : UIButton?
-
+    var convolvedOutput : AKConvolution?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let sourceFile = try? AKAudioFile(readFileName: "Sitting.wav", baseDir: .resources)
+        
         let IRFile = Bundle.main.path(forResource: "IR", ofType: "wav")
-        let urlOfIR = NSURL.fileURL(withPath: IRFile!)
+        print("Loaded Files")
+        let urlOfIR = Bundle.main.url(forResource: "IR", withExtension: "wav")!
+        print("Created URL")
         let player = sourceFile?.player
+        print("Created Player")
         
-        let convolvedOutput = AKConvolution(player!, impulseResponseFileURL: urlOfIR)
+        convolvedOutput = AKConvolution(player!, impulseResponseFileURL: urlOfIR)
+        //let oscillator = AKOscillator()
+        print("Created convolution")
+       
         
-        AudioKit.output = convolvedOutput
+        AudioKit.output = convolvedOutput!
+        print("Hooking up to output")
+        
         AudioKit.start()
+        print("Playing")
+        convolvedOutput!.start()
+        player!.start()
+        //player!.start()
         
         
         // Do any additional setup after loading the view, typically from a nib.
@@ -35,6 +48,11 @@ class ViewController: UIViewController {
         
         
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func turnOffConvolution(){
+        convolvedOutput!.stop()
+        print("Turning Off Convolution")
     }
 
 
