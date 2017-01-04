@@ -52,7 +52,7 @@ class ViewController: UIViewController {
     
     @IBAction func turnOffConvolution(){
         if(convolvedOutput!.isStarted){
-        convolvedOutput!.stop()
+            convolvedOutput!.stop()
         }
         else{
             convolvedOutput!.start()
