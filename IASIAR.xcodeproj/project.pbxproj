@@ -12,8 +12,8 @@
 		91E2D7691E1C74E3002CC300 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91E2D7671E1C74E3002CC300 /* Main.storyboard */; };
 		91E2D76B1E1C74E3002CC300 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91E2D76A1E1C74E3002CC300 /* Assets.xcassets */; };
 		91E2D76E1E1C74E3002CC300 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91E2D76C1E1C74E3002CC300 /* LaunchScreen.storyboard */; };
-		91E2D7761E1C759C002CC300 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91E2D7751E1C759C002CC300 /* AudioKit.framework */; };
-		91E2D7771E1C759D002CC300 /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 91E2D7751E1C759C002CC300 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		91E2D77A1E1C7A15002CC300 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91E2D7791E1C7A15002CC300 /* AudioKit.framework */; };
+		91E2D77B1E1C7A15002CC300 /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 91E2D7791E1C7A15002CC300 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,7 +23,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				91E2D7771E1C759D002CC300 /* AudioKit.framework in Embed Frameworks */,
+				91E2D77B1E1C7A15002CC300 /* AudioKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -38,7 +38,7 @@
 		91E2D76A1E1C74E3002CC300 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		91E2D76D1E1C74E3002CC300 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		91E2D76F1E1C74E3002CC300 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		91E2D7751E1C759C002CC300 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AudioKit.framework; sourceTree = "<group>"; };
+		91E2D7791E1C7A15002CC300 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AudioKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,7 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				91E2D7761E1C759C002CC300 /* AudioKit.framework in Frameworks */,
+				91E2D77A1E1C7A15002CC300 /* AudioKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,7 +56,7 @@
 		91E2D7571E1C74E2002CC300 = {
 			isa = PBXGroup;
 			children = (
-				91E2D7751E1C759C002CC300 /* AudioKit.framework */,
+				91E2D7791E1C7A15002CC300 /* AudioKit.framework */,
 				91E2D7621E1C74E2002CC300 /* IASIAR */,
 				91E2D7611E1C74E2002CC300 /* Products */,
 			);
