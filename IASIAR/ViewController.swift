@@ -18,7 +18,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         let sourceFile = try? AKAudioFile(readFileName: "Sitting.wav", baseDir: .resources)
         
-        let IRFile = Bundle.main.path(forResource: "IR", ofType: "wav")
+        //let IRFile = Bundle.main.path(forResource: "IR", ofType: "wav")
         print("Loaded Files")
         let urlOfIR = Bundle.main.url(forResource: "IR", withExtension: "wav")!
         print("Created URL")
@@ -51,7 +51,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func turnOffConvolution(){
+        if(convolvedOutput!.isStarted){
         convolvedOutput!.stop()
+        }
+        else{
+            convolvedOutput!.start()
+        }
         print("Turning Off Convolution")
     }
 
