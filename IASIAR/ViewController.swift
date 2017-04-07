@@ -13,15 +13,27 @@ class ViewController: UIViewController {
     
     @IBOutlet var processButton : UIButton?
     var convolvedOutput : AKConvolution?
+    var convolvedOutput2 : AKConvolution?
+    @IBOutlet var iterations : UISlider?
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let sourceFile = try? AKAudioFile(readFileName: "Sitting.wav", baseDir: .resources)
         let urlOfIR = Bundle.main.url(forResource: "IR", withExtension: "wav")!
+        let urlOfIteratedIR = Bundle.main.url(forResource: "IR", withExtension: "wav")! // placeholder
+        let IRsourceFile = try? AKAudioFile(readFileName: "IR.wav", baseDir: .resources)
         let player = sourceFile?.player
-        
-        convolvedOutput = AKConvolution(player!, impulseResponseFileURL: urlOfIR)
-        
+        var IRPlayer : AKAudioPlayer
+        if let IRPlayerTest = IRsourceFile?.player{
+            IRPlayer = IRPlayerTest
+            print("Hi")
+        }
+        var numberOfIterations : Int
+        updateIR()
+        convolvedOutput = AKConvolution(player!, impulseResponseFileURL: urlOfIteratedIR)
+
         AudioKit.output = convolvedOutput!
         AudioKit.start()
        
@@ -40,6 +52,13 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func updateIR(IRPlayer: AKAudioPlayer)
+    {
+        let urlOfIR = Bundle.main.url(forResource: "IR", withExtension: "wav")!
+        let iteratedIR = AKConvolution(IRPlayer, impulseResponseFileURL: urlOfIR )
+        
+    }
+    
     @IBAction func turnOffConvolution(){
         if(convolvedOutput!.isStarted){
 
@@ -47,6 +66,12 @@ class ViewController: UIViewController {
 
         }
         else{
+            var IRiteration = convolvedOutput
+           // let urlOfIR = Bundle.main.url(forResource: "IR", withExtension: "wav")!
+           // for index in 1...5 {
+           //     IRiteration = AKConvolution(IRiteration!, impulseResponseFileURL: urlOfIR)
+           // }
+
             convolvedOutput!.start()
         }
         print("Turning Off Convolution")
