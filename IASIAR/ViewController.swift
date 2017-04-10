@@ -15,7 +15,9 @@ class ViewController: UIViewController {
     var convolvedOutput : AKConvolution?
     var convolvedOutput2 : AKConvolution?
     @IBOutlet var iterations : UISlider?
-    
+    var numberOfIterations : Int = 0
+    //@IBAction func updateNumIterations(sender: UISlider)
+    @IBOutlet var displayIterations: UILabel?
     
     
     override func viewDidLoad() {
@@ -31,7 +33,7 @@ class ViewController: UIViewController {
             print("Hi")
         }
         var numberOfIterations : Int
-        updateIR()
+        //updateIR()
         convolvedOutput = AKConvolution(player!, impulseResponseFileURL: urlOfIteratedIR)
 
         AudioKit.output = convolvedOutput!
@@ -43,6 +45,7 @@ class ViewController: UIViewController {
         
         
         // Do any additional setup after loading the view, typically from a nib.
+        print("Hello")
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,13 +55,13 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func updateIR(IRPlayer: AKAudioPlayer)
+    /*func updateIR(IRPlayer: AKAudioPlayer)
     {
         let urlOfIR = Bundle.main.url(forResource: "IR", withExtension: "wav")!
         let iteratedIR = AKConvolution(IRPlayer, impulseResponseFileURL: urlOfIR )
         
     }
-    
+    */
     @IBAction func turnOffConvolution(){
         if(convolvedOutput!.isStarted){
 
@@ -78,5 +81,9 @@ class ViewController: UIViewController {
     }
 
 
+    @IBAction func updateNumIterations(sliderValue: UISlider){
+        numberOfIterations = Int(sliderValue.value)
+        displayIterations?.text = ("Number of Iterations: \(numberOfIterations)")
+    }
 }
 
