@@ -45,6 +45,7 @@ class ViewController: UIViewController {
         
         
         AudioKit.output = player
+        file = try? AKAudioFile(name: "test_output")
         recorder = try? AKNodeRecorder(node:AudioKit.output!, file: file)
         AudioKit.start()
         
@@ -94,7 +95,7 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func updateIR(IRPlayer: AKAudioPlayer)
+    func updateIR(_ IRPlayer: AKAudioPlayer)
     {
         let urlOfIR = Bundle.main.url(forResource: "IR", withExtension: "wav")!
         let iteratedIR = AKConvolution(IRPlayer, impulseResponseFileURL: urlOfIR )
@@ -107,7 +108,7 @@ class ViewController: UIViewController {
             convolvedOutput!.stop()
             recorder!.stop()
             print("Ready to Export")
-            file?.exportAsynchronously(name: "TempTestFile.m4a", baseDir: .documents, exportFormat: .m4a) {_, error in
+            file?.exportAsynchronously(name: "TempTestFile.caf", baseDir: .documents, exportFormat: .caf) {_, error in
                 print("Writing the output file")
                 if error != nil {
                     print("Export Failed \(error)")
@@ -119,19 +120,14 @@ class ViewController: UIViewController {
 
         }
         else{
-            var IRiteration = convolvedOutput
-           // let urlOfIR = Bundle.main.url(forResource: "IR", withExtension: "wav")!
-           // for index in 1...5 {
-           //     IRiteration = AKConvolution(IRiteration!, impulseResponseFileURL: urlOfIR)
-           // }
-
+           
             convolvedOutput!.start()
         }
         print("Turning Off Convolution")
     }
 
 
-    @IBAction func updateNumIterations(sliderValue: UISlider){
+    @IBAction func updateNumIterations(_ sliderValue: UISlider){
         numberOfIterations = Int(sliderValue.value)
         displayIterations?.text = ("Number of Iterations: \(numberOfIterations)")
     }
