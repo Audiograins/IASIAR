@@ -1,0 +1,76 @@
+//
+//  AKComponent.swift
+//  AudioKit
+//
+//  Created by Aurelius Prochazka, revision history on Github.
+//  Copyright © 2017 Aurelius Prochazka. All rights reserved.
+//
+
+public protocol Aliased {
+    associatedtype _Self = Self
+}
+
+public protocol AUComponent: class, Aliased {
+    static var ComponentDescription: AudioComponentDescription { get }
+}
+
+protocol AUEffect: AUComponent { }
+
+extension AUEffect {
+    static var effect: AVAudioUnitEffect {
+        return AVAudioUnitEffect(audioComponentDescription: ComponentDescription)
+    }
+}
+
+public protocol AKComponent: AUComponent {
+    associatedtype AKAudioUnitType: AnyObject
+}
+
+extension AKComponent {
+    public static func register() {
+        AUAudioUnit.registerSubclass(Self.AKAudioUnitType.self,
+                                     as: Self.ComponentDescription,
+                                     name: "Local \(Self.self)",
+                                     version: UInt32.max)
+    }
+}
+
+extension AUParameterTree {
+    public subscript (key: String) -> AUParameter? {
+        return value(forKey: key) as? AUParameter
+    }
+}
+
+extension AudioComponentDescription {
+    public init(type: OSType, subType: OSType) {
+        self.init(componentType: type,
+                  componentSubType: subType,
+                  componentManufacturer: fourCC("AuKt"),
+                  componentFlags: 0,
+                  componentFlagsMask: 0)
+    }
+
+    public init(appleEffect subType: OSType) {
+        self.init(componentType: kAudioUnitType_Effect,
+                  componentSubType: subType,
+                  componentManufacturer: kAudioUnitManufacturer_Apple,
+                  componentFlags: 0,
+                  componentFlagsMask: 0)
+    }
+
+    public init(effect subType: OSType) {
+        self.init(type: kAudioUnitType_Effect, subType: subType)
+    }
+
+    public init(effect subType: String) {
+        self.init(effect: fourCC(subType))
+    }
+
+    public init(mixer subType: String) {
+        self.init(type: kAudioUnitType_Mixer, subType: fourCC(subType))
+    }
+
+    public init(generator subType: String) {
+        self.init(type: kAudioUnitType_Generator, subType: fourCC(subType))
+    }
+}
