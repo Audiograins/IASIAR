@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     //@IBAction func updateNumIterations(sender: UISlider)
     @IBOutlet var displayIterations: UILabel?
     var recorder: AKNodeRecorder?
+    var file : AKAudioFile?
 
     
     
@@ -26,50 +27,48 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+       
         do {
             try AKSettings.setSession(category: .playAndRecord, with: .defaultToSpeaker)
+            
         } catch { print("Errored setting category.") }
 
         
         let sourceFile = try? AKAudioFile(readFileName: "Sitting.wav", baseDir: .resources)
         let urlOfIR = Bundle.main.url(forResource: "IR", withExtension: "wav")!
-        let urlOfIteratedIR = Bundle.main.url(forResource: "IR", withExtension: "wav")! // placeholder
-        let IRsourceFile = try? AKAudioFile(readFileName: "IR.wav", baseDir: .resources)
+    
         let player = sourceFile?.player
-        var IRPlayer : AKAudioPlayer
-        if let IRPlayerTest = IRsourceFile?.player{
-            IRPlayer = IRPlayerTest
-            print("Hi")
-        }
-        var numberOfIterations : Int
-        //updateIR()
-        convolvedOutput = AKConvolution(player!, impulseResponseFileURL: urlOfIteratedIR)
-
-        AudioKit.output = convolvedOutput!
-        //var recorder = try? AKNodeRecorder(node: convolvedOutput!)
+        player?.looping = true
         
-        //if let file = recorder?.audioFile {
-           
-        //}
+        convolvedOutput = AKConvolution(player!, impulseResponseFileURL: urlOfIR)
+        
+        
+        
+        AudioKit.output = player
+        recorder = try? AKNodeRecorder(node:AudioKit.output!, file: file)
         AudioKit.start()
         
-        
-        
         convolvedOutput!.start()
-        /*do {
+        
+        player!.start()
+        
+        do {
+            print("1")
             try recorder?.record()
+            print("2")
         } catch { print("Error Recording") }
-        */
-        player?.audioFile.exportAsynchronously(name: "TempTestFile.m4a", baseDir: .documents, exportFormat: .m4a) {_, error in
+        print("Recording Started")
+
+        
+        /*player?.audioFile.exportAsynchronously(name: "TempTestFile.m4a", baseDir: .documents, exportFormat: .m4a) {_, error in
             if error != nil {
                 print("Export Failed \(error)")
             } else {
                 print("Export succeeded")
             }
         }
-
-        player!.start()
-        /*try convolvedOutput.exportAsynchronously(name: "convolved",
+ */
+        /*try convolvedOutput?.audioFile.exportAsynchronously(name: "convolved",
                                                  baseDir: .documents,
                                                  exportFormat: .wav) { exportedFile, error in
         print("myExportCallback has been triggered so export has ended")
@@ -79,8 +78,8 @@ class ViewController: UIViewController {
                                                     else {
                                                         print("Export Failed: \(error)")
                                                     }
-        
- */
+        */
+ 
         //player!.start()
         
         
@@ -106,6 +105,17 @@ class ViewController: UIViewController {
         if(convolvedOutput!.isStarted){
 
             convolvedOutput!.stop()
+            recorder!.stop()
+            print("Ready to Export")
+            file?.exportAsynchronously(name: "TempTestFile.m4a", baseDir: .documents, exportFormat: .m4a) {_, error in
+                print("Writing the output file")
+                if error != nil {
+                    print("Export Failed \(error)")
+                } else {
+                    print("Export succeeded")
+                }
+            }
+
 
         }
         else{
