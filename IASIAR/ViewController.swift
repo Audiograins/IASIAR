@@ -20,9 +20,6 @@ class ViewController: UIViewController {
     @IBOutlet var displayIterations: UILabel?
     var recorder: AKNodeRecorder?
     var file : AKAudioFile?
-
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,33 +30,34 @@ class ViewController: UIViewController {
             
         } catch { print("Errored setting category.") }
 
+        AKAudioFile.cleanTempDirectory()
         
         let sourceFile = try? AKAudioFile(readFileName: "Sitting.wav", baseDir: .resources)
         let urlOfIR = Bundle.main.url(forResource: "IR", withExtension: "wav")!
     
         let player = sourceFile?.player
-        player?.looping = true
+        //player?.looping = true
         
-        convolvedOutput = AKConvolution(player!, impulseResponseFileURL: urlOfIR)
+        convolvedOutput = AKConvolution(player, impulseResponseFileURL: urlOfIR)
         
         
         
-        AudioKit.output = player
-        file = try? AKAudioFile(name: "test_output")
-        recorder = try? AKNodeRecorder(node:AudioKit.output!, file: file)
+        AudioKit.output = convolvedOutput!
+        //file = try! AKAudioFile(name: "test_output")
+        //recorder = try! AKNodeRecorder(node:player!, file: file)
         AudioKit.start()
         
         convolvedOutput!.start()
         
         player!.start()
         
-        do {
+        /*do {
             print("1")
             try recorder?.record()
             print("2")
         } catch { print("Error Recording") }
         print("Recording Started")
-
+*/
         
         /*player?.audioFile.exportAsynchronously(name: "TempTestFile.m4a", baseDir: .documents, exportFormat: .m4a) {_, error in
             if error != nil {
@@ -106,9 +104,9 @@ class ViewController: UIViewController {
         if(convolvedOutput!.isStarted){
 
             convolvedOutput!.stop()
-            recorder!.stop()
-            print("Ready to Export")
-            file?.exportAsynchronously(name: "TempTestFile.caf", baseDir: .documents, exportFormat: .caf) {_, error in
+            //recorder!.stop()
+            /*print("Ready to Export")
+            file?.exportAsynchronously(name: "TempTestFile.m4a", baseDir: .documents, exportFormat: .m4a) {_, error in
                 print("Writing the output file")
                 if error != nil {
                     print("Export Failed \(error)")
@@ -116,7 +114,7 @@ class ViewController: UIViewController {
                     print("Export succeeded")
                 }
             }
-
+*/
 
         }
         else{
