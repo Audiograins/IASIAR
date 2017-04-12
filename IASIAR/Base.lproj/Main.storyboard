@@ -31,7 +31,7 @@
                                     <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="turnOffConvolution" destination="BYZ-38-t0r" eventType="touchUpInside" id="F2J-oe-m3v"/>
+                                    <action selector="turnOffConvolution" destination="BYZ-38-t0r" eventType="touchUpInside" id="dws-iK-iWj"/>
                                 </connections>
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="32" translatesAutoresizingMaskIntoConstraints="NO" id="tJd-xq-Axm">
@@ -54,7 +54,7 @@
                     <connections>
                         <outlet property="displayIterations" destination="aSZ-xo-1xC" id="nLZ-G2-nhA"/>
                         <outlet property="iterations" destination="tJd-xq-Axm" id="jYB-XR-MrT"/>
-                        <outlet property="processButton" destination="Hex-tw-foc" id="mdG-Zv-x5i"/>
+                        <outlet property="processButton" destination="Hex-tw-foc" id="J4i-Fp-gYf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
