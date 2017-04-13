@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     
     @IBOutlet var processButton : UIButton?
     @IBOutlet var recordButton : UIButton?
-    var convolvedOutput : AKBitCrusher?
+    var convolvedOutput : AKConvolution?
     @IBOutlet var iterations : UISlider?
     var numberOfIterations : Int = 0
     @IBOutlet var displayIterations: UILabel?
@@ -31,11 +31,12 @@ class ViewController: UIViewController {
         AKAudioFile.cleanTempDirectory()
         AKSettings.bufferLength = .veryLong
         AKSettings.playbackWhileMuted = true
+        AKSettings.defaultToSpeaker = true
 
-        do {
-            try AKSettings.setSession(category: .playAndRecord, with: .defaultToSpeaker)
-     
-        } catch { print("Errored setting category.") }
+        //do {
+        //    try AKSettings.setSession(category: .playAndRecord, with: .defaultToSpeaker)
+     //
+       // } catch { print("Errored setting category.") }
 
 
         sourceFile = try? AKAudioFile(readFileName: "Sitting.wav", baseDir: .resources)
@@ -43,8 +44,8 @@ class ViewController: UIViewController {
     
         player = sourceFile?.player
         
-        convolvedOutput = AKBitCrusher(player!,bitDepth: 4,sampleRate: 44100)
-        //convolvedOutput = AKConvolution(player!, impulseResponseFileURL: urlOfIR)
+        //convolvedOutput = AKBitCrusher(player!,bitDepth: 4,sampleRate: 44100)
+        convolvedOutput = AKConvolution(player!, impulseResponseFileURL: urlOfIR!)
         convolveMixer = AKMixer(convolvedOutput!)
         
         recordMixer = AKMixer(convolveMixer)
@@ -59,7 +60,7 @@ class ViewController: UIViewController {
         
         recorder = try? AKNodeRecorder(node: convolveMixer, file: tape!)
         
-        //convolvedOutput!.start()
+        convolvedOutput!.start()
         player!.start()
         
         // Do any additional setup after loading the view, typically from a nib.
