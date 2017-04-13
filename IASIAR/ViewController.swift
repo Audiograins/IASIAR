@@ -47,15 +47,16 @@ class ViewController: UIViewController {
         //convolvedOutput = AKConvolution(player!, impulseResponseFileURL: urlOfIR)
         convolveMixer = AKMixer(convolvedOutput!)
         
-                //recordMixer = AKMixer(convolveMixer)
+        recordMixer = AKMixer(convolveMixer)
         
-        tape = try? AKAudioFile()
+        tape = try? AKAudioFile(name:"output")
         print(tape!.url)
        
     
         
-        AudioKit.output = convolveMixer
+        AudioKit.output = recordMixer
         AudioKit.start()
+        
         recorder = try? AKNodeRecorder(node: convolveMixer, file: tape!)
         
         //convolvedOutput!.start()
@@ -97,7 +98,9 @@ class ViewController: UIViewController {
             recorder?.stop()
             
             print("Ready to Export")
-            tape!.exportAsynchronously(name: "IASIAR_output.caf", baseDir: .documents, exportFormat: .caf) {_, error in
+            print((recorder?.audioFile)!.fileName)
+            print(tape!.fileName)
+            tape!.player?.audioFile.exportAsynchronously(name: "IASIAR_output.caf", baseDir: .documents, exportFormat: .caf) {_, error in
                 print("Writing the output file")
                 if error != nil {
                     print("Export Failed \(error)")
