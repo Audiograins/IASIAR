@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     
     @IBOutlet var processButton : UIButton?
     @IBOutlet var recordButton : UIButton?
-    var convolvedOutput : AKConvolution?
+    var convolvedOutput : AKBitCrusher?
     @IBOutlet var iterations : UISlider?
     var numberOfIterations : Int = 0
     @IBOutlet var displayIterations: UILabel?
@@ -22,12 +22,14 @@ class ViewController: UIViewController {
     var player : AKAudioPlayer?
     var convolveMixer : AKMixer?
     var recordMixer : AKMixer?
+    var sourceFile : AKAudioFile?
+    var urlOfIR : URL?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         AKAudioFile.cleanTempDirectory()
-        AKSettings.bufferLength = .longest
+        AKSettings.bufferLength = .veryLong
         AKSettings.playbackWhileMuted = true
 
         do {
@@ -36,24 +38,27 @@ class ViewController: UIViewController {
         } catch { print("Errored setting category.") }
 
 
-        let sourceFile = try? AKAudioFile(readFileName: "Sitting.wav", baseDir: .resources)
-        let urlOfIR = Bundle.main.url(forResource: "IR", withExtension: "wav")!
+        sourceFile = try? AKAudioFile(readFileName: "Sitting.wav", baseDir: .resources)
+        urlOfIR = Bundle.main.url(forResource: "IR", withExtension: "wav")!
     
         player = sourceFile?.player
         
-        convolvedOutput = AKConvolution(player!, impulseResponseFileURL: urlOfIR)
+        convolvedOutput = AKBitCrusher(player!,bitDepth: 4,sampleRate: 44100)
+        //convolvedOutput = AKConvolution(player!, impulseResponseFileURL: urlOfIR)
         convolveMixer = AKMixer(convolvedOutput!)
         
-        recordMixer = AKMixer(convolvedOutput!)
+                //recordMixer = AKMixer(convolveMixer)
         
-        tape = try? AKAudioFile(name: "test_output")
-        recorder = try? AKNodeRecorder(node: recordMixer)
-        
+        tape = try? AKAudioFile()
+        print(tape!.url)
+       
+    
         
         AudioKit.output = convolveMixer
         AudioKit.start()
+        recorder = try? AKNodeRecorder(node: convolveMixer, file: tape!)
         
-        convolvedOutput!.start()
+        //convolvedOutput!.start()
         player!.start()
         
         // Do any additional setup after loading the view, typically from a nib.
@@ -90,8 +95,9 @@ class ViewController: UIViewController {
         
         if recorder!.isRecording {
             recorder?.stop()
+            
             print("Ready to Export")
-            tape!.exportAsynchronously(name: "TempTestFile.m4a", baseDir: .documents, exportFormat: .m4a) {_, error in
+            tape!.exportAsynchronously(name: "IASIAR_output.caf", baseDir: .documents, exportFormat: .caf) {_, error in
                 print("Writing the output file")
                 if error != nil {
                     print("Export Failed \(error)")
@@ -107,18 +113,22 @@ class ViewController: UIViewController {
         } catch { print("Couldn't reset recording buffer")}
         
         do {
-            print("1")
+            
             try recorder?.record()
-            print("2")
-        } catch { print("Error Recording") }
+            
+            
+                    } catch { print("Error Recording") }
         print("Recording Started")
+        
         }
+ 
     }
+ 
 
-    /*@IBAction func updateNumIterations(_ sliderValue: UISlider){
+    @IBAction func updateNumIterations(_ sliderValue: UISlider){
         numberOfIterations = Int(sliderValue.value)
         displayIterations?.text = ("Number of Iterations: \(numberOfIterations)")
     }
- */
+ 
 }
 

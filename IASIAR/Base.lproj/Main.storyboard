@@ -38,7 +38,7 @@
                                 <rect key="frame" x="120" y="340" width="118" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="updateNumIterationsWithSliderValue:" destination="BYZ-38-t0r" eventType="valueChanged" id="6vK-cr-T6p"/>
+                                    <action selector="updateNumIterations:" destination="BYZ-38-t0r" eventType="valueChanged" id="neY-j0-ikj"/>
                                 </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Number of Iterations: 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aSZ-xo-1xC">
@@ -64,7 +64,7 @@
                     </view>
                     <connections>
                         <outlet property="displayIterations" destination="aSZ-xo-1xC" id="nLZ-G2-nhA"/>
-                        <outlet property="iterations" destination="tJd-xq-Axm" id="jYB-XR-MrT"/>
+                        <outlet property="iterations" destination="tJd-xq-Axm" id="W4e-AZ-V2K"/>
                         <outlet property="processButton" destination="Hex-tw-foc" id="J4i-Fp-gYf"/>
                         <outlet property="recordButton" destination="l9p-2o-Sem" id="z8Y-FS-Iki"/>
                     </connections>
