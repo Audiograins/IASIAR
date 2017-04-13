@@ -48,6 +48,17 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l9p-2o-Sem">
+                                <rect key="frame" x="100" y="213" width="158" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.56446619882918259" green="0.77101002836642574" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="RECORD">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="recordButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="g3E-Rd-mLh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -55,6 +66,7 @@
                         <outlet property="displayIterations" destination="aSZ-xo-1xC" id="nLZ-G2-nhA"/>
                         <outlet property="iterations" destination="tJd-xq-Axm" id="jYB-XR-MrT"/>
                         <outlet property="processButton" destination="Hex-tw-foc" id="J4i-Fp-gYf"/>
+                        <outlet property="recordButton" destination="l9p-2o-Sem" id="z8Y-FS-Iki"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
