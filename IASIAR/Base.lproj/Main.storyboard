@@ -21,8 +21,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="32" translatesAutoresizingMaskIntoConstraints="NO" id="tJd-xq-Axm">
+                                <rect key="frame" x="120" y="310" width="118" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="updateNumIterations:" destination="BYZ-38-t0r" eventType="valueChanged" id="neY-j0-ikj"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Number of Iterations: 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aSZ-xo-1xC">
+                                <rect key="frame" x="89" y="348" width="196" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l9p-2o-Sem">
+                                <rect key="frame" x="100" y="457" width="158" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.56446619882918259" green="0.77101002836642574" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Record Output">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="recordButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="g3E-Rd-mLh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wyV-0N-3jU">
+                                <rect key="frame" x="100" y="419" width="158" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.34821676709637084" green="1" blue="0.12015408573532238" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="PLAY Result">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hex-tw-foc">
-                                <rect key="frame" x="100" y="263" width="158" height="30"/>
+                                <rect key="frame" x="100" y="226" width="158" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.086649020745820954" green="0.69952188098376533" blue="0.78005205362271046" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -31,32 +64,20 @@
                                     <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="turnOffConvolution" destination="BYZ-38-t0r" eventType="touchUpInside" id="dws-iK-iWj"/>
+                                    <action selector="turnOffConvolution" destination="BYZ-38-t0r" eventType="touchUpInside" id="zmr-2f-t4S"/>
                                 </connections>
                             </button>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="32" translatesAutoresizingMaskIntoConstraints="NO" id="tJd-xq-Axm">
-                                <rect key="frame" x="120" y="340" width="118" height="31"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cts-4d-vu5">
+                                <rect key="frame" x="100" y="272" width="158" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="updateNumIterations:" destination="BYZ-38-t0r" eventType="valueChanged" id="neY-j0-ikj"/>
-                                </connections>
-                            </slider>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Number of Iterations: 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aSZ-xo-1xC">
-                                <rect key="frame" x="95" y="378" width="196" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l9p-2o-Sem">
-                                <rect key="frame" x="100" y="213" width="158" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.56446619882918259" green="0.77101002836642574" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="RECORD">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.78005205359999996" green="0.50492250721818188" blue="0.16266722377290482" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Process Iterations">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="recordButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="g3E-Rd-mLh"/>
+                                    <action selector="updateIR" destination="BYZ-38-t0r" eventType="touchUpInside" id="2e0-uH-Gn1"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -65,8 +86,10 @@
                     <connections>
                         <outlet property="displayIterations" destination="aSZ-xo-1xC" id="nLZ-G2-nhA"/>
                         <outlet property="iterations" destination="tJd-xq-Axm" id="W4e-AZ-V2K"/>
-                        <outlet property="processButton" destination="Hex-tw-foc" id="J4i-Fp-gYf"/>
+                        <outlet property="playButton" destination="wyV-0N-3jU" id="fPd-oN-ALD"/>
+                        <outlet property="processButton" destination="Cts-4d-vu5" id="fwa-IB-Dyk"/>
                         <outlet property="recordButton" destination="l9p-2o-Sem" id="z8Y-FS-Iki"/>
+                        <outlet property="toggleButton" destination="Hex-tw-foc" id="7uF-pQ-xle"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

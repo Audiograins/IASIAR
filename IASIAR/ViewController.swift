@@ -11,19 +11,25 @@ import AudioKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet var processButton : UIButton?
+    @IBOutlet var toggleButton : UIButton?
     @IBOutlet var recordButton : UIButton?
+    @IBOutlet var playButton : UIButton?
+    @IBOutlet var processButton : UIButton?
+
     var convolvedOutput : AKConvolution?
     @IBOutlet var iterations : UISlider?
     var numberOfIterations : Int = 0
     @IBOutlet var displayIterations: UILabel?
     var recorder: AKNodeRecorder?
+    var iterateRecorder: AKNodeRecorder?
+    var iterateFileIR: AKAudioFile?
     var tape : AKAudioFile?
     var player : AKAudioPlayer?
     var convolveMixer : AKMixer?
     var recordMixer : AKMixer?
     var sourceFile : AKAudioFile?
     var urlOfIR : URL?
+    var IRPlayer : AKAudioPlayer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,10 +80,19 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func updateIR(_ IRPlayer: AKAudioPlayer)
+    @IBAction func updateIR()
     {
         let urlOfIR = Bundle.main.url(forResource: "IR", withExtension: "wav")!
-        let iteratedIR = AKConvolution(IRPlayer, impulseResponseFileURL: urlOfIR )
+        if numberOfIterations > 1 {
+            let iteratedIR = AKConvolution(IRPlayer, impulseResponseFileURL: urlOfIR )
+            iterateRecorder = try? AKNodeRecorder(node: iteratedIR, file: iterateFileIR)
+            do {
+                
+            try iterateRecorder?.record()
+            } catch { print("Error Iterating")}
+
+        }
+        
         
     }
     
