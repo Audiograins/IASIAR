@@ -53,6 +53,9 @@
                                 <state key="normal" title="PLAY Result">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="playButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="eMy-UQ-J6a"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hex-tw-foc">
                                 <rect key="frame" x="100" y="226" width="158" height="30"/>
