@@ -18,7 +18,7 @@ class ViewController: UIViewController {
 
     var convolvedOutput : AKConvolution?
     @IBOutlet var iterations : UISlider?
-    var numberOfIterations : Int = 0
+    var numberOfIterations : Int = 1
     @IBOutlet var displayIterations: UILabel?
     var recorder: AKNodeRecorder?
     var iterateRecorder: AKNodeRecorder?
@@ -30,7 +30,10 @@ class ViewController: UIViewController {
     var sourceFile : AKAudioFile?
     var IR : AKAudioFile?
     var urlOfIR : URL?
-    var IRPlayer : AKAudioPlayer?
+    var IRPlayer : [AKAudioPlayer?] = []
+    var iteratedIR : AKConvolution?
+    var iterateMixer : AKMixer?
+    var booster : AKBooster?
     
     
     override func viewDidLoad() {
@@ -46,8 +49,33 @@ class ViewController: UIViewController {
      //
        // } catch { print("Errored setting category.") }
 
+        sourceFile = try? AKAudioFile(readFileName: "Sitting.wav", baseDir: .resources)
+        urlOfIR = Bundle.main.url(forResource: "IR", withExtension: "wav")!
+        
+        player = sourceFile?.player
+        recordMixer = AKMixer(player!)
+        //convolvedOutput = AKBitCrusher(player!,bitDepth: 4,sampleRate: 44100)
+        AudioKit.output = recordMixer
+        AudioKit.start()
 
         
+        updateIR()
+        convolvedOutput = AKConvolution(player!, impulseResponseFileURL: IRPlayer[(numberOfIterations-1)]!.audioFile.url)
+        convolveMixer = AKMixer(convolvedOutput!)
+        
+        recordMixer = AKMixer(convolveMixer)
+        
+        tape = try? AKAudioFile(name:"output")
+        
+        print(tape!.url)
+        
+        
+        
+        
+        
+        convolvedOutput!.start()
+        
+        recorder = try? AKNodeRecorder(node: convolveMixer, file: tape!)
         
         
         
@@ -64,39 +92,64 @@ class ViewController: UIViewController {
     
     @IBAction func updateIR()
     {
-        urlOfIR = Bundle.main.url(forResource: "IR", withExtension: "wav")!
         IR = try? AKAudioFile(readFileName: "IR.wav", baseDir: .resources)
+        iterateFileIR = try? AKAudioFile(name:"temp_recording")
 
-        IRPlayer = IR?.player
-        
-        
-        if numberOfIterations > 1 {
-            let iteratedIR = AKConvolution(IRPlayer!, impulseResponseFileURL: urlOfIR! )
-            iterateRecorder = try? AKNodeRecorder(node: iteratedIR, file: iterateFileIR)
-            AudioKit.output = iteratedIR
-            AudioKit.start()
-            IRPlayer?.start()
-            iteratedIR.start()
-
+        for index in 0..<numberOfIterations{
+            IRPlayer.append(nil)
+  
+            if (index==0){
+                IRPlayer[index] = IR?.player
+            }
+            else{
+            IRPlayer[index] = iterateFileIR!.player
+            }
+            iteratedIR = AKConvolution(IRPlayer[index]!, impulseResponseFileURL: urlOfIR! )
+            iterateMixer = AKMixer(iteratedIR!)
+            iterateRecorder = try? AKNodeRecorder(node: iterateMixer, file: iterateFileIR)
+            
+            /*do{
+                try recorder?.reset()
+            } catch { print("Couldn't reset recording buffer")}
+            
             do {
                 
-                try iterateRecorder?.record()
-            } catch { print("Error Iterating")}
+                try recorder?.record()
+                
+                
+            } catch { print("Error Recording") }
+            print("Recording Started")
+            */
+            //AudioKit.output = iteratedIR
+            booster = AKBooster(IRPlayer[index]!,gain: 0)
+            iteratedIR!.start()
+            //IRPlayer[index]!.start()
 
+            
+            
         }
+
+        //convolvedOutput!.stop()
+        convolvedOutput = AKConvolution(player!, impulseResponseFileURL: IRPlayer[(numberOfIterations-1)]!.audioFile.url)
+        convolvedOutput!.start()
+        
+        
         
         
     }
     
-    @IBAction func turnOffConvolution(){
+    @IBAction func turnOffConvolution(_ sender: UIButton){
         
         if(convolvedOutput!.isStarted){
             convolvedOutput!.stop()
             print("Stopping Convolution")
+            sender.setTitle("TURN CONVOLUTION ON", for: .normal)
         }
         else{
             convolvedOutput!.start()
             print("Starting Convolution")
+            sender.setTitle("TURN CONVOLUTION OFF", for: .normal)
+
             }
     }
 
@@ -141,30 +194,17 @@ class ViewController: UIViewController {
         displayIterations?.text = ("Number of Iterations: \(numberOfIterations)")
     }
     
-    @IBAction func playButtonPressed(){
-        sourceFile = try? AKAudioFile(readFileName: "Sitting.wav", baseDir: .resources)
-        urlOfIR = Bundle.main.url(forResource: "IR", withExtension: "wav")!
-        
-        player = sourceFile?.player
-        
-        //convolvedOutput = AKBitCrusher(player!,bitDepth: 4,sampleRate: 44100)
-        convolvedOutput = AKConvolution(player!, impulseResponseFileURL: urlOfIR!)
-        convolveMixer = AKMixer(convolvedOutput!)
-        
-        recordMixer = AKMixer(convolveMixer)
-        
-        tape = try? AKAudioFile(name:"output")
-        print(tape!.url)
-        
-        
-        
-        AudioKit.output = recordMixer
-        AudioKit.start()
-        
-        convolvedOutput!.start()
-        player!.start()
+    @IBAction func playButtonPressed(_ sender: UIButton){
+        if player!.isPlaying{
+            player!.stop()
+            sender.setTitle("PLAY", for: .normal)
+        }
+        else
+        {
+            player!.start()
+            sender.setTitle("PAUSE", for: .normal)
 
-        recorder = try? AKNodeRecorder(node: convolveMixer, file: tape!)
+        }
     }
  
 }
