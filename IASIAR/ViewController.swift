@@ -53,12 +53,11 @@ class ViewController: UIViewController {
 
 
         sourceFile = try? AKAudioFile(readFileName: "Sitting.wav", baseDir: .resources)
-        urlOfIR = Bundle.main.url(forResource: "ir_1_C_1", withExtension: "wav")!
+        urlOfIR = Bundle.main.url(forResource: "IR", withExtension: "wav")!
         
         updateIR()
 
-        convolvedOutput!.start()
-        recorder = try? AKNodeRecorder(node: convolveMixer, file: tape!)
+        
         
         // Do any additional setup after loading the view, typically from a nib.
         print("End of ViewDidLoad")
