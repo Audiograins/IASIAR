@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet var recordButton : UIButton?
     @IBOutlet var playButton : UIButton?
     @IBOutlet var processButton : UIButton?
+    @IBOutlet var loadIterationButton : UIButton?
 
     var convolvedOutput : AKConvolution?
     @IBOutlet var iterations : UISlider?
@@ -34,7 +35,7 @@ class ViewController: UIViewController {
     var iteratedIR : AKConvolution?
     var iterateMixer : AKMixer?
     var booster : AKBooster?
-    
+    var normalizedIR : AKAudioFile?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +51,7 @@ class ViewController: UIViewController {
        // } catch { print("Errored setting category.") }
 
         sourceFile = try? AKAudioFile(readFileName: "Sitting.wav", baseDir: .resources)
-        urlOfIR = Bundle.main.url(forResource: "IR", withExtension: "wav")!
+        urlOfIR = Bundle.main.url(forResource: "ir_1_C_1", withExtension: "wav")!
         
         //player = sourceFile?.player
         //recordMixer = AKMixer(player!)
@@ -95,10 +96,12 @@ class ViewController: UIViewController {
     
     @IBAction func updateIR()
     {
+        processButton?.setTitle("Processing", for: .selected)
         AudioKit.stop()
         player = sourceFile?.player
         recordMixer = AKMixer(player!)
         IR = try? AKAudioFile(readFileName: "ir_1_C_1.wav", baseDir: .resources)
+                
         iterateFileIR = try? AKAudioFile(name:"temp_recording")
 
         for index in 0..<numberOfIterations{
@@ -136,7 +139,7 @@ class ViewController: UIViewController {
                         //IRPlayer[index]!.start()
             repeat{
                 
-            }while iterateRecorder!.recordedDuration <= (((IRPlayer[index]?.audioFile.player!.duration)!)*2)-1
+            }while iterateRecorder!.recordedDuration <= (((IRPlayer[index]?.audioFile.player!.duration)!)+(IRPlayer[0]?.audioFile.player!.duration)!)-1
             
         AudioKit.stop()
             
@@ -237,6 +240,29 @@ class ViewController: UIViewController {
             sender.setTitle("PAUSE", for: .normal)
 
         }
+    }
+    
+    @IBAction func loadIteration(){
+        AudioKit.stop()
+        player = sourceFile?.player
+        recordMixer = AKMixer(player!)
+        IR = try? AKAudioFile(readFileName: "ir_1_C_1.wav", baseDir: .resources)
+        convolvedOutput = AKConvolution(player!, impulseResponseFileURL: IRPlayer[(numberOfIterations-1)]!.audioFile.url)
+        convolveMixer = AKMixer(convolvedOutput!)
+        
+        recordMixer = AKMixer(convolveMixer)
+        tape = try? AKAudioFile(name:"output")
+        AudioKit.output = recordMixer
+        AudioKit.start()
+        
+        print(tape!.url)
+        
+        playButton?.setTitle("PLAY", for: .normal)
+        
+        
+        
+        convolvedOutput!.start()
+        recorder = try? AKNodeRecorder(node: convolveMixer, file: tape!)
     }
  
 }

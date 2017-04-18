@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		914D44931E1D6F4B00D3B81A /* IR.wav in Resources */ = {isa = PBXBuildFile; fileRef = 914D44921E1D6F4B00D3B81A /* IR.wav */; };
 		914D44951E1D6F6100D3B81A /* Sitting.wav in Resources */ = {isa = PBXBuildFile; fileRef = 914D44941E1D6F6100D3B81A /* Sitting.wav */; };
-		916160D61EA564F500C0E48A /* ir_1_C_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 916160D51EA564F500C0E48A /* ir_1_C_1.wav */; };
+		917810E31EA580A600092E8D /* ir_1_C_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 917810E21EA580A600092E8D /* ir_1_C_1.wav */; };
+		917810E51EA580A900092E8D /* IR.wav in Resources */ = {isa = PBXBuildFile; fileRef = 917810E41EA580A900092E8D /* IR.wav */; };
 		91CDC42E1E9E8D0800484153 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91CDC4261E9E8C8800484153 /* AudioKit.framework */; };
 		91CDC42F1E9E8D0800484153 /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 91CDC4261E9E8C8800484153 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		91E2D7641E1C74E3002CC300 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E2D7631E1C74E3002CC300 /* AppDelegate.swift */; };
@@ -58,9 +58,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		914D44921E1D6F4B00D3B81A /* IR.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = IR.wav; sourceTree = "<group>"; };
 		914D44941E1D6F6100D3B81A /* Sitting.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sitting.wav; sourceTree = "<group>"; };
-		916160D51EA564F500C0E48A /* ir_1_C_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ir_1_C_1.wav; sourceTree = "<group>"; };
+		917810E21EA580A600092E8D /* ir_1_C_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ir_1_C_1.wav; sourceTree = "<group>"; };
+		917810E41EA580A900092E8D /* IR.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = IR.wav; sourceTree = "<group>"; };
 		91CDC4211E9E8C8800484153 /* AudioKit For iOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "AudioKit For iOS.xcodeproj"; path = "AudioKit/iOS/AudioKit For iOS.xcodeproj"; sourceTree = "<group>"; };
 		91E2D7601E1C74E2002CC300 /* IASIAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IASIAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91E2D7631E1C74E3002CC300 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -111,9 +111,9 @@
 		91E2D7621E1C74E2002CC300 /* IASIAR */ = {
 			isa = PBXGroup;
 			children = (
-				914D44921E1D6F4B00D3B81A /* IR.wav */,
-				916160D51EA564F500C0E48A /* ir_1_C_1.wav */,
 				914D44941E1D6F6100D3B81A /* Sitting.wav */,
+				917810E41EA580A900092E8D /* IR.wav */,
+				917810E21EA580A600092E8D /* ir_1_C_1.wav */,
 				91E2D7631E1C74E3002CC300 /* AppDelegate.swift */,
 				91E2D7651E1C74E3002CC300 /* ViewController.swift */,
 				91E2D7671E1C74E3002CC300 /* Main.storyboard */,
@@ -205,11 +205,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				91E2D76E1E1C74E3002CC300 /* LaunchScreen.storyboard in Resources */,
-				916160D61EA564F500C0E48A /* ir_1_C_1.wav in Resources */,
 				914D44951E1D6F6100D3B81A /* Sitting.wav in Resources */,
-				914D44931E1D6F4B00D3B81A /* IR.wav in Resources */,
 				91E2D76B1E1C74E3002CC300 /* Assets.xcassets in Resources */,
 				91E2D7691E1C74E3002CC300 /* Main.storyboard in Resources */,
+				917810E31EA580A600092E8D /* ir_1_C_1.wav in Resources */,
+				917810E51EA580A900092E8D /* IR.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

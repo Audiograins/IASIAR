@@ -84,12 +84,24 @@
                                     <action selector="updateIR" destination="BYZ-38-t0r" eventType="touchUpInside" id="2e0-uH-Gn1"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E9g-7t-FZF">
+                                <rect key="frame" x="100" y="495" width="158" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.34821676709999999" green="1" blue="0.1201540857" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Load Iteration #">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="loadIteration" destination="BYZ-38-t0r" eventType="touchUpInside" id="nzs-wN-Sar"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <outlet property="displayIterations" destination="aSZ-xo-1xC" id="nLZ-G2-nhA"/>
                         <outlet property="iterations" destination="tJd-xq-Axm" id="W4e-AZ-V2K"/>
+                        <outlet property="loadIterationButton" destination="E9g-7t-FZF" id="TU7-Bo-Pmt"/>
                         <outlet property="playButton" destination="wyV-0N-3jU" id="LbH-Az-cVt"/>
                         <outlet property="processButton" destination="Cts-4d-vu5" id="fwa-IB-Dyk"/>
                         <outlet property="recordButton" destination="l9p-2o-Sem" id="z8Y-FS-Iki"/>
