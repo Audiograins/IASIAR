@@ -16,6 +16,11 @@ class ViewController: UIViewController {
     @IBOutlet var playButton : UIButton?
     @IBOutlet var processButton : UIButton?
     @IBOutlet var loadIterationButton : UIButton?
+    @IBOutlet var stepper : UIStepper?
+    @IBOutlet var displaySelectedIteration : UILabel?
+    @IBOutlet var processingIndicator : UIActivityIndicatorView?
+    
+    
 
     var convolvedOutput : AKConvolution?
     @IBOutlet var iterations : UISlider?
@@ -36,6 +41,7 @@ class ViewController: UIViewController {
     var iterateMixer : AKMixer?
     var booster : AKBooster?
     var normalizedIR : AKAudioFile?
+    var selectedIteration : Int = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,77 +102,105 @@ class ViewController: UIViewController {
     
     @IBAction func updateIR()
     {
-        processButton?.setTitle("Processing", for: .selected)
-        AudioKit.stop()
-        player = sourceFile?.player
-        recordMixer = AKMixer(player!)
-        IR = try? AKAudioFile(readFileName: "ir_1_C_1.wav", baseDir: .resources)
+        
+        DispatchQueue.global(qos: .background).async {
+            print("This is run on the background queue")
+            
+            
+            AudioKit.stop()
+            self.player = self.sourceFile?.player
+            self.recordMixer = AKMixer(self.player!)
+            self.IR = try? AKAudioFile(readFileName: "IR.wav", baseDir: .resources)
+            print (self.IR!.maxLevel)
+            
+            DispatchQueue.main.async {
+                print("This is run on the main queue, after the previous code in outer block")
                 
-        iterateFileIR = try? AKAudioFile(name:"temp_recording")
+                
+                self.processButton?.setTitle("Processing", for: .normal)
+                self.processingIndicator?.startAnimating()
+            }
 
-        for index in 0..<numberOfIterations{
-            IRPlayer.append(nil)
-  
-            if (index==0){
-                IRPlayer[index] = IR?.player
-            }
-            else{
-                IRPlayer[index] = iterateRecorder?.audioFile?.player
-            }
-            iteratedIR = AKConvolution(IRPlayer[index]!, impulseResponseFileURL: urlOfIR! )
-            iterateMixer = AKMixer(iteratedIR!)
-            AudioKit.output = iterateMixer
-            AudioKit.start()
-            iteratedIR!.start()
-            IRPlayer[index]!.start()
-            iterateRecorder = try? AKNodeRecorder(node: iterateMixer)
-            
-            do{
-                try iterateRecorder?.reset()
-            } catch { print("Couldn't reset recording buffer")}
-            
             do {
+                try self.normalizedIR = self.IR!.normalized()
+            } catch { print("Error Normalizing")}
+            
+            self.iterateFileIR = try? AKAudioFile(name:"temp_recording")
+            
+            for index in 0..<self.numberOfIterations{
+                self.IRPlayer.append(nil)
                 
-                try iterateRecorder?.record()
+                if (index==0){
+                    self.IRPlayer[index] = self.IR?.player
+                }
+                else{
+                    self.IRPlayer[index] = self.iterateRecorder?.audioFile?.player
+                }
+                self.iteratedIR = AKConvolution(self.IRPlayer[index]!, impulseResponseFileURL: self.urlOfIR! )
+                self.iterateMixer = AKMixer(self.iteratedIR!)
+                AudioKit.output = self.iterateMixer
+                AudioKit.start()
+                self.iteratedIR!.start()
+                self.IRPlayer[index]!.start()
+                self.iterateRecorder = try? AKNodeRecorder(node: self.iterateMixer)
+                
+                do{
+                    try self.iterateRecorder?.reset()
+                } catch { print("Couldn't reset recording buffer")}
+                
+                do {
+                    
+                    try self.iterateRecorder?.record()
+                    
+                    
+                } catch { print("Error Recording") }
+                print("Recording Started")
+                
+                //AudioKit.output = iteratedIR
+                //booster = AKBooster(IRPlayer[index]!,gain: 0)
+                
+                //IRPlayer[index]!.start()
+                repeat{
+                    
+                }while self.iterateRecorder!.recordedDuration <= (((self.IRPlayer[index]?.audioFile.player!.duration)!)+(self.IRPlayer[0]?.audioFile.player!.duration)!)-1
+                
+                AudioKit.stop()
                 
                 
-            } catch { print("Error Recording") }
-            print("Recording Started")
-            
-            //AudioKit.output = iteratedIR
-            //booster = AKBooster(IRPlayer[index]!,gain: 0)
-            
-                        //IRPlayer[index]!.start()
-            repeat{
+                self.selectedIteration = self.numberOfIterations
+                self.stepper?.value = Double(self.numberOfIterations)
+                self.stepper?.maximumValue = Double(self.numberOfIterations)
+                self.displaySelectedIteration?.text = String(self.selectedIteration)
                 
-            }while iterateRecorder!.recordedDuration <= (((IRPlayer[index]?.audioFile.player!.duration)!)+(IRPlayer[0]?.audioFile.player!.duration)!)-1
+                
+            }
             
-        AudioKit.stop()
+            //convolvedOutput!.stop()
+            //convolvedOutput = AKConvolution(player!, impulseResponseFileURL: IRPlayer[(numberOfIterations-1)]!.audioFile.url)
+            //convolvedOutput!.start()
+            
+            self.convolvedOutput = AKConvolution(self.player!, impulseResponseFileURL: self.IRPlayer[(self.numberOfIterations-1)]!.audioFile.url)
+            self.convolveMixer = AKMixer(self.convolvedOutput!)
+            
+            self.recordMixer = AKMixer(self.convolveMixer)
+            self.tape = try? AKAudioFile(name:"output")
+            AudioKit.output = self.recordMixer
+            AudioKit.start()
+            
+            print(self.tape!.url)
             
             
-        }
+            
+            
+            
+            self.convolvedOutput!.start()
+            self.recorder = try? AKNodeRecorder(node: self.convolveMixer, file: self.tape!)
+            self.processButton?.setTitle("Process Iterations", for: .normal)
 
-        //convolvedOutput!.stop()
-        //convolvedOutput = AKConvolution(player!, impulseResponseFileURL: IRPlayer[(numberOfIterations-1)]!.audioFile.url)
-        //convolvedOutput!.start()
-        
-        convolvedOutput = AKConvolution(player!, impulseResponseFileURL: IRPlayer[(numberOfIterations-1)]!.audioFile.url)
-        convolveMixer = AKMixer(convolvedOutput!)
-        
-        recordMixer = AKMixer(convolveMixer)
-        tape = try? AKAudioFile(name:"output")
-        AudioKit.output = recordMixer
-        AudioKit.start()
-        
-        print(tape!.url)
-        
-        
-        
-        
-        
-        convolvedOutput!.start()
-        recorder = try? AKNodeRecorder(node: convolveMixer, file: tape!)
-        
+            self.processingIndicator?.stopAnimating()
+            print("Done")
+            
+                    }
       
     }
     
@@ -247,7 +281,7 @@ class ViewController: UIViewController {
         player = sourceFile?.player
         recordMixer = AKMixer(player!)
         IR = try? AKAudioFile(readFileName: "ir_1_C_1.wav", baseDir: .resources)
-        convolvedOutput = AKConvolution(player!, impulseResponseFileURL: IRPlayer[(numberOfIterations-1)]!.audioFile.url)
+        convolvedOutput = AKConvolution(player!, impulseResponseFileURL: IRPlayer[(selectedIteration-1)]!.audioFile.url)
         convolveMixer = AKMixer(convolvedOutput!)
         
         recordMixer = AKMixer(convolveMixer)
@@ -265,6 +299,10 @@ class ViewController: UIViewController {
         recorder = try? AKNodeRecorder(node: convolveMixer, file: tape!)
     }
  
+    @IBAction func updateSelectedIteration(_ sender: UIStepper){
+        selectedIteration = Int(sender.value)
+        displaySelectedIteration?.text = String(selectedIteration)
+    }
 }
 
 
