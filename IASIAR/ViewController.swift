@@ -51,43 +51,14 @@ class ViewController: UIViewController {
         AKSettings.playbackWhileMuted = true
         AKSettings.defaultToSpeaker = true
 
-        //do {
-        //    try AKSettings.setSession(category: .playAndRecord, with: .defaultToSpeaker)
-     //
-       // } catch { print("Errored setting category.") }
 
         sourceFile = try? AKAudioFile(readFileName: "Sitting.wav", baseDir: .resources)
         urlOfIR = Bundle.main.url(forResource: "ir_1_C_1", withExtension: "wav")!
         
-        //player = sourceFile?.player
-        //recordMixer = AKMixer(player!)
-        
-        //convolvedOutput = AKBitCrusher(player!,bitDepth: 4,sampleRate: 44100)
-        
-
-        
         updateIR()
-        //convolvedOutput = AKConvolution(player!, impulseResponseFileURL: urlOfIR!)
 
-        /*convolvedOutput = AKConvolution(player!, impulseResponseFileURL: IRPlayer[(numberOfIterations-1)]!.audioFile.url)
-        convolveMixer = AKMixer(convolvedOutput!)
-        
-        recordMixer = AKMixer(convolveMixer)
-        tape = try? AKAudioFile(name:"output")
-        AudioKit.output = recordMixer
-        AudioKit.start()
-        
-        print(tape!.url)
-        
-        
-        
-        
-        
         convolvedOutput!.start()
         recorder = try? AKNodeRecorder(node: convolveMixer, file: tape!)
-        
-        */
-        
         
         // Do any additional setup after loading the view, typically from a nib.
         print("End of ViewDidLoad")
@@ -111,6 +82,10 @@ class ViewController: UIViewController {
             self.player = self.sourceFile?.player
             self.recordMixer = AKMixer(self.player!)
             self.IR = try? AKAudioFile(readFileName: "IR.wav", baseDir: .resources)
+            if(self.IR?.maxLevel == Float.leastNormalMagnitude)
+            {
+                print("WARNING: IR file is silent or too quiet")
+            }
             print (self.IR!.maxLevel)
             
             DispatchQueue.main.async {
