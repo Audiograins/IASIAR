@@ -53,7 +53,7 @@ class ViewController: UIViewController {
 
 
         sourceFile = try? AKAudioFile(readFileName: "Sitting.wav", baseDir: .resources)
-        urlOfIR = Bundle.main.url(forResource: "IR", withExtension: "wav")!
+        urlOfIR = Bundle.main.url(forResource: "ir_1_C_1", withExtension: "wav")!
         
         updateIR()
 
@@ -80,7 +80,7 @@ class ViewController: UIViewController {
             AudioKit.stop()
             self.player = self.sourceFile?.player
             self.recordMixer = AKMixer(self.player!)
-            self.IR = try? AKAudioFile(readFileName: "IR.wav", baseDir: .resources)
+            self.IR = try? AKAudioFile(readFileName: "ir_1_C_1.wav", baseDir: .resources)
             if(self.IR?.maxLevel == Float.leastNormalMagnitude)
             {
                 print("WARNING: IR file is silent or too quiet")
@@ -96,7 +96,8 @@ class ViewController: UIViewController {
             }
 
             do {
-                try self.normalizedIR = self.IR!.normalized()
+                try self.normalizedIR = self.IR?.normalized()
+                print (self.normalizedIR!.maxLevel)
             } catch { print("Error Normalizing")}
             
             self.iterateFileIR = try? AKAudioFile(name:"temp_recording")
@@ -105,7 +106,7 @@ class ViewController: UIViewController {
                 self.IRPlayer.append(nil)
                 
                 if (index==0){
-                    self.IRPlayer[index] = self.IR?.player
+                    self.IRPlayer[index] = self.normalizedIR?.player
                 }
                 else{
                     self.IRPlayer[index] = self.iterateRecorder?.audioFile?.player
@@ -254,7 +255,7 @@ class ViewController: UIViewController {
         AudioKit.stop()
         player = sourceFile?.player
         recordMixer = AKMixer(player!)
-        IR = try? AKAudioFile(readFileName: "ir_1_C_1.wav", baseDir: .resources)
+        IR = try? AKAudioFile(readFileName: "IR.wav", baseDir: .resources)
         convolvedOutput = AKConvolution(player!, impulseResponseFileURL: IRPlayer[(selectedIteration-1)]!.audioFile.url)
         convolveMixer = AKMixer(convolvedOutput!)
         
