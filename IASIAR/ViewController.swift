@@ -53,7 +53,7 @@ class ViewController: UIViewController {
 
 
         sourceFile = try? AKAudioFile(readFileName: "Sitting.wav", baseDir: .resources)
-        urlOfIR = Bundle.main.url(forResource: "ir_1_C_1", withExtension: "wav")!
+        urlOfIR = Bundle.main.url(forResource: "grange", withExtension: "wav")!
         
         updateIR()
 
@@ -80,7 +80,7 @@ class ViewController: UIViewController {
             AudioKit.stop()
             self.player = self.sourceFile?.player
             self.recordMixer = AKMixer(self.player!)
-            self.IR = try? AKAudioFile(readFileName: "ir_1_C_1.wav", baseDir: .resources)
+            self.IR = try? AKAudioFile(readFileName: "grange.wav", baseDir: .resources)
             if(self.IR?.maxLevel == Float.leastNormalMagnitude)
             {
                 print("WARNING: IR file is silent or too quiet")
