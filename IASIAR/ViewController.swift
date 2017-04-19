@@ -49,8 +49,9 @@ class ViewController: UIViewController {
         AKAudioFile.cleanTempDirectory()
         AKSettings.bufferLength = .veryLong
         AKSettings.playbackWhileMuted = true
-        AKSettings.defaultToSpeaker = true
-
+        
+        try? AKSettings.setSession(category: .playAndRecord, with: .defaultToSpeaker)
+        
 
         sourceFile = try? AKAudioFile(readFileName: "Sitting.wav", baseDir: .resources)
         urlOfIR = Bundle.main.url(forResource: "grange", withExtension: "wav")!
@@ -122,7 +123,7 @@ class ViewController: UIViewController {
                 do{
                     try self.iterateRecorder?.reset()
                 } catch { print("Couldn't reset recording buffer")}
-                
+                print(self.IR)
                 do {
                     
                     try self.iterateRecorder?.record()
