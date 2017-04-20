@@ -256,7 +256,7 @@ class ViewController: UIViewController {
         AudioKit.stop()
         player = sourceFile?.player
         recordMixer = AKMixer(player!)
-        IR = try? AKAudioFile(readFileName: "IR.wav", baseDir: .resources)
+        IR = try? AKAudioFile(readFileName: "grange.wav", baseDir: .resources)
         convolvedOutput = AKConvolution(player!, impulseResponseFileURL: IRPlayer[(selectedIteration-1)]!.audioFile.url)
         convolveMixer = AKMixer(convolvedOutput!)
         
