@@ -46,6 +46,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print(AudioKit.availableInputs)
+        print(AudioKit.outputs)
         AKAudioFile.cleanTempDirectory()
         AKSettings.bufferLength = .veryLong
         AKSettings.playbackWhileMuted = true
@@ -79,6 +81,9 @@ class ViewController: UIViewController {
             
             
             AudioKit.stop()
+            self.urlOfIR = Bundle.main.url(forResource: "grange", withExtension: "wav")!
+
+            print("Output: \(AudioKit.outputDevice)")
             self.player = self.sourceFile?.player
             self.recordMixer = AKMixer(self.player!)
             self.IR = try? AKAudioFile(readFileName: "grange.wav", baseDir: .resources)
@@ -123,11 +128,13 @@ class ViewController: UIViewController {
                 do{
                     try self.iterateRecorder?.reset()
                 } catch { print("Couldn't reset recording buffer")}
-                print(self.IR)
                 do {
-                    
+                    print(self.IRPlayer[index]!.audioFile)
+                    print(self.iteratedIR)
+                    print(self.iterateMixer)
                     try self.iterateRecorder?.record()
-                    
+                    print(self.IRPlayer[index]!.audioFile)
+
                     
                 } catch { print("Error Recording") }
                 print("Recording Started")
@@ -221,7 +228,7 @@ class ViewController: UIViewController {
         } catch { print("Couldn't reset recording buffer")}
         
         do {
-
+            
             try recorder?.record()
             
             

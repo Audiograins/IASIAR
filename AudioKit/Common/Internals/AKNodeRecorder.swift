@@ -113,7 +113,7 @@
 
             if AKSettings.session.category != "\(AKSettings.SessionCategory.playAndRecord)" {
                 do {
-                    try AKSettings.setSession(category: .playAndRecord)
+                    //try AKSettings.setSession(category: .playAndRecord)
                 } catch let error as NSError {
                     AKLog("AKNodeRecorder Error: Cannot set AVAudioSession Category to be .PlaybackAndRecord")
                     throw error
