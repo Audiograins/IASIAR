@@ -125,7 +125,7 @@ class ViewController: UIViewController {
  
     @IBAction func updateSelectedIteration(_ sender: UIStepper){
         processer.selectedIteration = Int(sender.value)
-        displaySelectedIteration?.text = String(processer.selectedIteration)
+        loadIterationButton?.titleLabel?.text = String("Load Iteration # \(processer.selectedIteration)")
     }
     
 }

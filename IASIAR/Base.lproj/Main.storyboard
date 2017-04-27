@@ -21,105 +21,124 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="15" translatesAutoresizingMaskIntoConstraints="NO" id="tJd-xq-Axm">
-                                <rect key="frame" x="140" y="261" width="118" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="updateNumIterations:" destination="BYZ-38-t0r" eventType="valueChanged" id="neY-j0-ikj"/>
-                                </connections>
-                            </slider>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l9p-2o-Sem">
-                                <rect key="frame" x="118" y="456" width="158" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="0.030903091054016008" blue="0.080992599440260382" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Record Output">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="recordButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="g3E-Rd-mLh"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wyV-0N-3jU">
-                                <rect key="frame" x="118" y="418" width="158" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.34821676709637084" green="1" blue="0.12015408573532238" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="PLAY">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="playButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4uS-FO-uSv"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hex-tw-foc">
-                                <rect key="frame" x="118" y="171" width="158" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.086649020745820954" green="0.69952188098376533" blue="0.78005205362271046" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="TURN CONVOLUTION OFF">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="turnOffConvolution:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DlX-2i-l91"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cts-4d-vu5">
-                                <rect key="frame" x="118" y="217" width="158" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.78005205359999996" green="0.50492250721818188" blue="0.16266722377290482" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Process Iterations">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="updateIR" destination="BYZ-38-t0r" eventType="touchUpInside" id="2e0-uH-Gn1"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E9g-7t-FZF">
-                                <rect key="frame" x="107" y="536" width="185" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.2776825703917406" green="0.57539771525835115" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Load Iteration #">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="loadIteration" destination="BYZ-38-t0r" eventType="touchUpInside" id="nzs-wN-Sar"/>
-                                </connections>
-                            </button>
-                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="15" translatesAutoresizingMaskIntoConstraints="NO" id="7vX-sb-Znb">
-                                <rect key="frame" x="150" y="499" width="94" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="updateSelectedIteration:" destination="BYZ-38-t0r" eventType="valueChanged" id="Mof-GN-86j"/>
-                                </connections>
-                            </stepper>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vbc-lq-vj1">
-                                <rect key="frame" x="265" y="537" width="42" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="1h8-ou-bSQ">
-                                <rect key="frame" x="181" y="350" width="37" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="hF9-dP-IUb">
+                                <rect key="frame" x="86" y="238.33333333333331" width="250" height="260.33333333333337"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hex-tw-foc">
+                                        <rect key="frame" x="0.0" y="0.0" width="250" height="25.999999999999972"/>
+                                        <color key="backgroundColor" red="0.086649020745820954" green="0.69952188098376533" blue="0.78005205362271046" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="250" id="pc4-4a-dvg"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="TURN CONVOLUTION OFF">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="turnOffConvolution:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DlX-2i-l91"/>
+                                        </connections>
+                                    </button>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="15" translatesAutoresizingMaskIntoConstraints="NO" id="tJd-xq-Axm">
+                                        <rect key="frame" x="-2" y="30.999999999999972" width="254" height="31"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="250" id="aII-Zr-Huc"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="updateNumIterations:" destination="BYZ-38-t0r" eventType="valueChanged" id="neY-j0-ikj"/>
+                                        </connections>
+                                    </slider>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of Iterations: 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aSZ-xo-1xC">
+                                        <rect key="frame" x="38" y="65.999999999999972" width="174" height="20.333333333333371"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cts-4d-vu5">
+                                        <rect key="frame" x="0.0" y="91.333333333333343" width="250" height="30"/>
+                                        <color key="backgroundColor" red="0.78005205359999996" green="0.50492250721818188" blue="0.16266722377290482" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="250" id="L4T-G5-FQ7"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Process Iterations">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="updateIR" destination="BYZ-38-t0r" eventType="touchUpInside" id="2e0-uH-Gn1"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wyV-0N-3jU">
+                                        <rect key="frame" x="0.0" y="126.33333333333334" width="250" height="30"/>
+                                        <color key="backgroundColor" red="0.34821676709637084" green="1" blue="0.12015408573532238" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="250" id="BvO-2x-GLw"/>
+                                        </constraints>
+                                        <state key="normal" title="PLAY">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="playButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4uS-FO-uSv"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E9g-7t-FZF">
+                                        <rect key="frame" x="0.0" y="161.33333333333334" width="250" height="30"/>
+                                        <color key="backgroundColor" red="0.2776825703917406" green="0.57539771525835115" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="250" id="wuW-CJ-TXT"/>
+                                        </constraints>
+                                        <state key="normal" title="Load Iteration # 01">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="loadIteration" destination="BYZ-38-t0r" eventType="touchUpInside" id="nzs-wN-Sar"/>
+                                        </connections>
+                                    </button>
+                                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="15" translatesAutoresizingMaskIntoConstraints="NO" id="7vX-sb-Znb">
+                                        <rect key="frame" x="78" y="196.33333333333334" width="94" height="29"/>
+                                        <connections>
+                                            <action selector="updateSelectedIteration:" destination="BYZ-38-t0r" eventType="valueChanged" id="Mof-GN-86j"/>
+                                        </connections>
+                                    </stepper>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l9p-2o-Sem">
+                                        <rect key="frame" x="0.0" y="230.33333333333334" width="250" height="30.000000000000028"/>
+                                        <color key="backgroundColor" red="1" green="0.030903091054016008" blue="0.080992599440260382" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="250" id="dDW-Sx-rVU"/>
+                                        </constraints>
+                                        <state key="normal" title="Record Output">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="recordButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="g3E-Rd-mLh"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Cts-4d-vu5" firstAttribute="width" secondItem="Hex-tw-foc" secondAttribute="width" id="GWD-H4-Jc9"/>
+                                    <constraint firstItem="E9g-7t-FZF" firstAttribute="width" secondItem="Hex-tw-foc" secondAttribute="width" id="Tcl-Ax-l40"/>
+                                    <constraint firstItem="tJd-xq-Axm" firstAttribute="width" secondItem="Hex-tw-foc" secondAttribute="width" id="aWw-rW-GXm"/>
+                                    <constraint firstItem="wyV-0N-3jU" firstAttribute="width" secondItem="Hex-tw-foc" secondAttribute="width" id="g1R-MG-6vP"/>
+                                    <constraint firstItem="l9p-2o-Sem" firstAttribute="width" secondItem="Hex-tw-foc" secondAttribute="width" id="toS-Me-Xvy"/>
+                                </constraints>
+                            </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="1h8-ou-bSQ">
+                                <rect key="frame" x="188.66666666666666" y="178" width="37" height="37"/>
                                 <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Number of Iterations: 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aSZ-xo-1xC">
-                                <rect key="frame" x="107" y="299" width="196" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="hF9-dP-IUb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="4" id="4tV-aP-TRg"/>
+                            <constraint firstItem="hF9-dP-IUb" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="0.5" id="cYd-et-Zho"/>
+                            <constraint firstItem="hF9-dP-IUb" firstAttribute="top" secondItem="1h8-ou-bSQ" secondAttribute="bottom" constant="23.333332061767578" id="mRc-d5-XaJ"/>
+                            <constraint firstItem="1h8-ou-bSQ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="x1f-cW-GGU"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="displayIterations" destination="aSZ-xo-1xC" id="nLZ-G2-nhA"/>
-                        <outlet property="displaySelectedIteration" destination="vbc-lq-vj1" id="ZT6-5b-OGh"/>
                         <outlet property="iterations" destination="tJd-xq-Axm" id="W4e-AZ-V2K"/>
                         <outlet property="loadIterationButton" destination="E9g-7t-FZF" id="TU7-Bo-Pmt"/>
                         <outlet property="playButton" destination="wyV-0N-3jU" id="LbH-Az-cVt"/>
@@ -132,7 +151,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
+            <point key="canvasLocation" x="135" y="138.38028169014083"/>
         </scene>
     </scenes>
 </document>
