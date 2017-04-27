@@ -43,6 +43,21 @@ class ViewController: UIViewController {
     
     @IBAction func updateIR()
     {
+        playButton?.setTitle("PLAY", for: .normal)
+        playButton?.setTitleColor(UIColor.gray, for: .disabled)
+        playButton?.isEnabled = false
+        
+        recordButton?.setTitleColor(UIColor.gray, for: .disabled)
+        recordButton?.isEnabled = false
+        
+        stepper?.isEnabled = false
+        
+        loadIterationButton?.setTitleColor(UIColor.gray, for: .disabled)
+        loadIterationButton?.isEnabled = false
+        
+        toggleButton?.setTitleColor(UIColor.gray, for: .disabled)
+        toggleButton?.isEnabled = false
+        
         processButton?.setTitle("Processing", for: .normal)
         processingIndicator?.startAnimating()
         processer.update(completion: { (result) -> Void in
@@ -51,7 +66,11 @@ class ViewController: UIViewController {
             self.stepper?.value = Double(self.processer.numberOfIterations)
             self.stepper?.maximumValue = Double(self.processer.numberOfIterations)
             self.displaySelectedIteration?.text = String(self.processer.selectedIteration)
-
+            self.playButton?.isEnabled = true
+            self.recordButton?.isEnabled = true
+            self.loadIterationButton?.isEnabled = true
+            self.toggleButton?.isEnabled = true
+            self.stepper?.isEnabled = true
             
         })
         
