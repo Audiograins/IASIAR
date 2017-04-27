@@ -64,11 +64,7 @@ class Processer {
                     print("WARNING: IR file is silent or too quiet")
                 }
                 
-              //  DispatchQueue.main.async {
-              //      print("This is run on the main queue, after the previous code in outer block")
               //
-                    
-               // }
                 
                 do {
                     try self.normalizedIR = self.IR?.normalized()
@@ -130,8 +126,13 @@ class Processer {
                 
                 self.convolvedOutput!.start()
                 self.recorder = try? AKNodeRecorder(node: self.convolveMixer, file: self.tape!)
-        
-                completion(true)
+                
+                DispatchQueue.main.async {
+                          print("This is run on the main queue, after the previous code in outer block")
+                        completion(true)
+
+                    
+                     }
 
                                 }
         

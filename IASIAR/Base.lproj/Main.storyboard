@@ -22,10 +22,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="hF9-dP-IUb">
-                                <rect key="frame" x="86" y="238.33333333333331" width="250" height="260.33333333333337"/>
+                                <rect key="frame" x="86" y="237.66666666666669" width="250" height="262.33333333333337"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hex-tw-foc">
-                                        <rect key="frame" x="0.0" y="0.0" width="250" height="25.999999999999972"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="250" height="26.000000000000028"/>
                                         <color key="backgroundColor" red="0.086649020745820954" green="0.69952188098376533" blue="0.78005205362271046" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="250" id="pc4-4a-dvg"/>
@@ -41,7 +41,7 @@
                                         </connections>
                                     </button>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="15" translatesAutoresizingMaskIntoConstraints="NO" id="tJd-xq-Axm">
-                                        <rect key="frame" x="-2" y="30.999999999999972" width="254" height="31"/>
+                                        <rect key="frame" x="-2" y="31.000000000000028" width="254" height="31"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="250" id="aII-Zr-Huc"/>
                                         </constraints>
@@ -50,7 +50,7 @@
                                         </connections>
                                     </slider>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of Iterations: 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aSZ-xo-1xC">
-                                        <rect key="frame" x="38" y="65.999999999999972" width="174" height="20.333333333333371"/>
+                                        <rect key="frame" x="38" y="66.000000000000028" width="174" height="20.333333333333314"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -83,13 +83,14 @@
                                             <action selector="playButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4uS-FO-uSv"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E9g-7t-FZF">
-                                        <rect key="frame" x="0.0" y="161.33333333333334" width="250" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E9g-7t-FZF">
+                                        <rect key="frame" x="0.0" y="161.33333333333334" width="250" height="32"/>
                                         <color key="backgroundColor" red="0.2776825703917406" green="0.57539771525835115" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="250" id="wuW-CJ-TXT"/>
                                         </constraints>
-                                        <state key="normal" title="Load Iteration # 01">
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                        <state key="normal" title="Load Iteration # 1">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
@@ -97,13 +98,13 @@
                                         </connections>
                                     </button>
                                     <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="15" translatesAutoresizingMaskIntoConstraints="NO" id="7vX-sb-Znb">
-                                        <rect key="frame" x="78" y="196.33333333333334" width="94" height="29"/>
+                                        <rect key="frame" x="78" y="198.33333333333334" width="94" height="29"/>
                                         <connections>
                                             <action selector="updateSelectedIteration:" destination="BYZ-38-t0r" eventType="valueChanged" id="Mof-GN-86j"/>
                                         </connections>
                                     </stepper>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l9p-2o-Sem">
-                                        <rect key="frame" x="0.0" y="230.33333333333334" width="250" height="30.000000000000028"/>
+                                        <rect key="frame" x="0.0" y="232.33333333333334" width="250" height="30.000000000000028"/>
                                         <color key="backgroundColor" red="1" green="0.030903091054016008" blue="0.080992599440260382" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="250" id="dDW-Sx-rVU"/>
@@ -125,7 +126,7 @@
                                 </constraints>
                             </stackView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="1h8-ou-bSQ">
-                                <rect key="frame" x="188.66666666666666" y="178" width="37" height="37"/>
+                                <rect key="frame" x="188.66666666666666" y="177.33333333333334" width="37" height="37"/>
                                 <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
                         </subviews>

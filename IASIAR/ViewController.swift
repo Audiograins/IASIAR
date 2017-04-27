@@ -52,6 +52,9 @@ class ViewController: UIViewController {
         
         stepper?.isEnabled = false
         
+        processButton?.setTitleColor(UIColor.gray, for: .disabled)
+        processButton?.isEnabled = false
+        
         loadIterationButton?.setTitleColor(UIColor.gray, for: .disabled)
         loadIterationButton?.isEnabled = false
         
@@ -71,7 +74,10 @@ class ViewController: UIViewController {
             self.loadIterationButton?.isEnabled = true
             self.toggleButton?.isEnabled = true
             self.stepper?.isEnabled = true
-            
+            self.stepper?.value = Double(self.processer.numberOfIterations)
+            let stringToDisplay = String(format: "%02d", self.processer.selectedIteration)
+            self.loadIterationButton?.setTitle("Load Iteration # " + stringToDisplay, for: .normal)
+            self.processButton?.isEnabled = true
         })
         
     }
@@ -125,8 +131,8 @@ class ViewController: UIViewController {
  
     @IBAction func updateSelectedIteration(_ sender: UIStepper){
         processer.selectedIteration = Int(sender.value)
-        loadIterationButton?.titleLabel?.text = String("Load Iteration # \(processer.selectedIteration)")
-    }
+        let stringToDisplay = String(format: "%02d", processer.selectedIteration)
+        loadIterationButton?.setTitle("Load Iteration # " + stringToDisplay, for: .normal)    }
     
 }
 
