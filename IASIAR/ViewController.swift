@@ -46,11 +46,11 @@ class ViewController: UIViewController {
         processButton?.setTitle("Processing", for: .normal)
         processingIndicator?.startAnimating()
         processer.update(completion: { (result) -> Void in
-            processButton?.setTitle("Process Iterations", for: .normal)
-            processingIndicator?.stopAnimating()
-            stepper?.value = Double(processer.numberOfIterations)
-            stepper?.maximumValue = Double(processer.numberOfIterations)
-            displaySelectedIteration?.text = String(processer.selectedIteration)
+            self.processButton?.setTitle("Process Iterations", for: .normal)
+            self.processingIndicator?.stopAnimating()
+            self.stepper?.value = Double(self.processer.numberOfIterations)
+            self.stepper?.maximumValue = Double(self.processer.numberOfIterations)
+            self.displaySelectedIteration?.text = String(self.processer.selectedIteration)
 
             
         })

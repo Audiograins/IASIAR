@@ -46,7 +46,7 @@ class Processer {
     }
 
     
-    func update(completion: ((_ result:Bool?)-> Void)){
+    func update(completion: @escaping ((_ result:Bool?)-> Void)){
         
             
             DispatchQueue.global(qos: .background).async {
@@ -131,10 +131,10 @@ class Processer {
                 self.convolvedOutput!.start()
                 self.recorder = try? AKNodeRecorder(node: self.convolveMixer, file: self.tape!)
         
-        
+                completion(true)
+
                                 }
         
-        completion(true)
 
     }
     
