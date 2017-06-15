@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="hF9-dP-IUb">
-                                <rect key="frame" x="67" y="185.5" width="250" height="297.5"/>
+                                <rect key="frame" x="67" y="168" width="250" height="332.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hex-tw-foc">
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="26"/>
@@ -129,6 +129,19 @@
                                             <action selector="sourceRecordButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="z5N-LU-lOj"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mEh-K8-1qA">
+                                        <rect key="frame" x="0.0" y="302.5" width="250" height="30"/>
+                                        <color key="backgroundColor" red="1" green="0.55306912885316972" blue="0.23853657533100925" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="250" id="JWE-vy-NNc"/>
+                                        </constraints>
+                                        <state key="normal" title="Record New IR">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="IRRecordButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UBs-jb-U3t"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="Cts-4d-vu5" firstAttribute="width" secondItem="Hex-tw-foc" secondAttribute="width" id="GWD-H4-Jc9"/>
@@ -139,7 +152,7 @@
                                 </constraints>
                             </stackView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="1h8-ou-bSQ">
-                                <rect key="frame" x="169" y="142.5" width="37" height="37"/>
+                                <rect key="frame" x="169" y="125" width="37" height="37"/>
                                 <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
                         </subviews>
@@ -159,6 +172,7 @@
                         <outlet property="processButton" destination="Cts-4d-vu5" id="fwa-IB-Dyk"/>
                         <outlet property="processingIndicator" destination="1h8-ou-bSQ" id="Zr3-lj-clg"/>
                         <outlet property="recordButton" destination="l9p-2o-Sem" id="z8Y-FS-Iki"/>
+                        <outlet property="recordIRButton" destination="mEh-K8-1qA" id="Uhm-wb-66u"/>
                         <outlet property="recordSourceButton" destination="fWg-Je-N4R" id="f8D-My-4xV"/>
                         <outlet property="stepper" destination="7vX-sb-Znb" id="HN1-zP-TKB"/>
                         <outlet property="toggleButton" destination="Hex-tw-foc" id="N08-C5-7Ew"/>

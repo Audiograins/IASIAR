@@ -20,6 +20,7 @@ class ViewController: UIViewController {
     @IBOutlet var displaySelectedIteration : UILabel?
     @IBOutlet var processingIndicator : UIActivityIndicatorView?
     @IBOutlet var recordSourceButton : UIButton?
+    @IBOutlet var recordIRButton : UIButton?
 
     @IBOutlet var iterations : UISlider?
     @IBOutlet var displayIterations: UILabel?
@@ -34,6 +35,8 @@ class ViewController: UIViewController {
         addButtonBorder(sender: playButton)
         addButtonBorder(sender: recordButton)
         addButtonBorder(sender: recordSourceButton)
+        addButtonBorder(sender: recordIRButton)
+
 
 
         updateIR()
@@ -123,6 +126,17 @@ class ViewController: UIViewController {
         }
         else{
             sender.setTitle("Record New Source", for: .normal)
+        }
+    }
+    
+    @IBAction func IRRecordButtonPressed(_ sender: UIButton){
+        
+        processer.IRRecord()
+        if(processer.IRRecorder!.isRecording){
+            sender.setTitle("Recording IR", for: .normal)
+        }
+        else{
+            sender.setTitle("Record New IR", for: .normal)
         }
     }
  

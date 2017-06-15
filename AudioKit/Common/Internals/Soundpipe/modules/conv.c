@@ -1,6 +1,6 @@
 /*
- * conv
- * 
+* conv;
+ *
  * This code has been extracted from the Csound opcode "ftconv".
  * It has been modified to work as a Soundpipe module.
  * 

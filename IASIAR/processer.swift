@@ -17,6 +17,7 @@ class Processer {
     var recorder: AKNodeRecorder?
     var iterateRecorder: AKNodeRecorder?
     var sourceRecorder: AKNodeRecorder?
+    var IRRecorder: AKNodeRecorder?
     var micMixer: AKMixer?
     var micBooster: AKBooster?
     var micSource: AKMicrophone?
@@ -61,18 +62,25 @@ class Processer {
                 
                 
                 AudioKit.stop()
-                self.urlOfIR = Bundle.main.url(forResource: "grange", withExtension: "wav")!
-                if(self.useUGSource){
-                    self.player = self.UGSource?.player
-                    print("Hi")
+                if(self.useUGSource)
+                {
+                    self.urlOfIR = self.IR?.url
                 }
                 else{
-                    self.player = self.sourceFile?.player
+                    self.urlOfIR = Bundle.main.url(forResource: "grange", withExtension: "wav")!
                 }
+                
+                self.player = self.sourceFile?.player
+                
                 print(self.player)
                 self.recordMixer = AKMixer(self.player!)
-                self.IR = try? AKAudioFile(readFileName: "grange.wav", baseDir: .resources)
-                if(self.IR?.maxLevel == Float.leastNormalMagnitude)
+                print(self.IR)
+                if(!self.useUGSource)
+                {
+                    self.IR = try? AKAudioFile(readFileName: "grange.wav", baseDir: .resources)
+                    print(self.IR)
+                }
+            /*    if(self.IR?.maxLevel == Float.leastNormalMagnitude)
                 {
                     print("WARNING: IR file is silent or too quiet")
                 }
@@ -82,14 +90,15 @@ class Processer {
                 do {
                     try self.normalizedIR = self.IR?.normalized()
                 } catch { print("Error Normalizing")}
-                
+                */
                 self.iterateFileIR = try? AKAudioFile(name:"temp_recording")
                 
                 for index in 0..<self.numberOfIterations{
                     self.IRPlayer.append(nil)
                     
                     if (index==0){
-                        self.IRPlayer[index] = self.normalizedIR?.player
+                        //self.IRPlayer[index] = self.NormalizedIR?.player
+                        self.IRPlayer[index] = self.IR?.player
                     }
                     else{
                         self.IRPlayer[index] = self.iterateRecorder?.audioFile?.player
@@ -145,6 +154,9 @@ class Processer {
                 self.convolvedOutput!.start()
                 self.recorder = try? AKNodeRecorder(node: self.convolveMixer, file: self.tape!)
                 self.sourceRecorder = try? AKNodeRecorder(node: self.micMixer, file: self.UGSource!)
+                self.IRRecorder = try? AKNodeRecorder(node: self.micMixer, file: self.UGSource!)
+
+                
                 
                 
                 
@@ -239,6 +251,51 @@ class Processer {
             
         }
     }
+    func IRRecord(){
+        if(IRRecorder!.isRecording){
+            IRRecorder?.stop()
+            
+            print("Finished Recording")
+            useUGSource = true
+            UGSource!.player?.audioFile.exportAsynchronously(name: "new_IR.caf", baseDir: .documents, exportFormat: .caf) {_, error in
+                print("Writing the output file")
+                if error != nil {
+                    print("Export Failed \(error)")
+                } else {
+                    print("Export succeeded")
+                }
+            }
+           
+            IR = UGSource
+            update(completion: { (result) -> Void in
+                print("Reloading IR and Source")
+            })
+            
+            
+            
+            
+        }
+        else {
+            
+            
+            //AudioKit.stop()
+            //AudioKit.output = micMixer
+            //AudioKit.start()
+            IRRecorder = try? AKNodeRecorder(node: micMixer, file: UGSource!)
+            do{
+                try IRRecorder?.reset()
+            } catch { print("Couldn't reset recording buffer")}
+            
+            do {
+                
+                try IRRecorder?.record()
+                
+                
+            } catch { print("Error Recording") }
+            print("Recording Started")
+            
+        }
+    }
 
     
     func play(){
@@ -258,7 +315,7 @@ class Processer {
         AudioKit.stop()
         player = sourceFile?.player
         recordMixer = AKMixer(player!)
-        IR = try? AKAudioFile(readFileName: "grange.wav", baseDir: .resources)
+       // IR = try? AKAudioFile(readFileName: "grange.wav", baseDir: .resources)
         convolvedOutput = AKConvolution(player!, impulseResponseFileURL: IRPlayer[(selectedIteration-1)]!.audioFile.url)
         convolveMixer = AKMixer(convolvedOutput!)
         
