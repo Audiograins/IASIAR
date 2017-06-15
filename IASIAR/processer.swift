@@ -80,7 +80,7 @@ class Processer {
                     self.IR = try? AKAudioFile(readFileName: "grange.wav", baseDir: .resources)
                     print(self.IR)
                 }
-            /*    if(self.IR?.maxLevel == Float.leastNormalMagnitude)
+            /*     if(self.IR?.maxLevel == Float.leastNormalMagnitude)
                 {
                     print("WARNING: IR file is silent or too quiet")
                 }
