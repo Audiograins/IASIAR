@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="hF9-dP-IUb">
-                                <rect key="frame" x="66.5" y="203" width="250" height="262.5"/>
+                                <rect key="frame" x="67" y="185.5" width="250" height="297.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hex-tw-foc">
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="26"/>
@@ -116,6 +116,19 @@
                                             <action selector="recordButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="g3E-Rd-mLh"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fWg-Je-N4R">
+                                        <rect key="frame" x="0.0" y="267.5" width="250" height="30"/>
+                                        <color key="backgroundColor" red="1" green="0.11957570844341558" blue="0.42992877343956981" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="250" id="QSC-0Z-JKV"/>
+                                        </constraints>
+                                        <state key="normal" title="Record New Source">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="sourceRecordButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="z5N-LU-lOj"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="Cts-4d-vu5" firstAttribute="width" secondItem="Hex-tw-foc" secondAttribute="width" id="GWD-H4-Jc9"/>
@@ -126,7 +139,7 @@
                                 </constraints>
                             </stackView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="1h8-ou-bSQ">
-                                <rect key="frame" x="169" y="160.5" width="37" height="37"/>
+                                <rect key="frame" x="169" y="142.5" width="37" height="37"/>
                                 <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
                         </subviews>
@@ -146,13 +159,14 @@
                         <outlet property="processButton" destination="Cts-4d-vu5" id="fwa-IB-Dyk"/>
                         <outlet property="processingIndicator" destination="1h8-ou-bSQ" id="Zr3-lj-clg"/>
                         <outlet property="recordButton" destination="l9p-2o-Sem" id="z8Y-FS-Iki"/>
+                        <outlet property="recordSourceButton" destination="fWg-Je-N4R" id="f8D-My-4xV"/>
                         <outlet property="stepper" destination="7vX-sb-Znb" id="HN1-zP-TKB"/>
                         <outlet property="toggleButton" destination="Hex-tw-foc" id="N08-C5-7Ew"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="135" y="138.38028169014083"/>
+            <point key="canvasLocation" x="133.59999999999999" y="138.0809595202399"/>
         </scene>
     </scenes>
 </document>

@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     @IBOutlet var stepper : UIStepper?
     @IBOutlet var displaySelectedIteration : UILabel?
     @IBOutlet var processingIndicator : UIActivityIndicatorView?
+    @IBOutlet var recordSourceButton : UIButton?
 
     @IBOutlet var iterations : UISlider?
     @IBOutlet var displayIterations: UILabel?
@@ -27,7 +28,14 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        addButtonBorder(sender: toggleButton)
+        addButtonBorder(sender: processButton)
+        addButtonBorder(sender: loadIterationButton)
+        addButtonBorder(sender: playButton)
+        addButtonBorder(sender: recordButton)
+        addButtonBorder(sender: recordSourceButton)
+
+
         updateIR()
         
         // Do any additional setup after loading the view, typically from a nib.
@@ -50,6 +58,9 @@ class ViewController: UIViewController {
         recordButton?.setTitleColor(UIColor.gray, for: .disabled)
         recordButton?.isEnabled = false
         
+        recordSourceButton?.setTitleColor(UIColor.gray, for: .disabled)
+        recordSourceButton?.isEnabled = false
+        
         stepper?.isEnabled = false
         
         processButton?.setTitleColor(UIColor.gray, for: .disabled)
@@ -71,6 +82,7 @@ class ViewController: UIViewController {
             self.displaySelectedIteration?.text = String(self.processer.selectedIteration)
             self.playButton?.isEnabled = true
             self.recordButton?.isEnabled = true
+            self.recordSourceButton?.isEnabled = true
             self.loadIterationButton?.isEnabled = true
             self.toggleButton?.isEnabled = true
             self.stepper?.isEnabled = true
@@ -101,6 +113,17 @@ class ViewController: UIViewController {
         
         processer.record()
  
+    }
+    
+    @IBAction func sourceRecordButtonPressed(_ sender: UIButton){
+        
+        processer.sourceRecord()
+        if(processer.sourceRecorder!.isRecording){
+            sender.setTitle("Recording Source", for: .normal)
+        }
+        else{
+            sender.setTitle("Record New Source", for: .normal)
+        }
     }
  
 
@@ -134,6 +157,14 @@ class ViewController: UIViewController {
         let stringToDisplay = String(format: "%02d", processer.selectedIteration)
         loadIterationButton?.setTitle("Load Iteration # " + stringToDisplay, for: .normal)    }
     
+    func addButtonBorder(sender:UIButton!){
+        sender.layer.borderWidth = 1
+        sender.layer.borderColor = UIColor.black.cgColor
+        sender.layer.cornerRadius = 5
+        sender.layer.shadowColor = UIColor.darkGray.cgColor
+        sender.layer.shadowOpacity = 0.8
+        sender.layer.shadowOffset = CGSize(width:2,height:2)
+    }
 }
 
 

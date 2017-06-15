@@ -16,6 +16,11 @@ class Processer {
     
     var recorder: AKNodeRecorder?
     var iterateRecorder: AKNodeRecorder?
+    var sourceRecorder: AKNodeRecorder?
+    var micMixer: AKMixer?
+    var micBooster: AKBooster?
+    var micSource: AKMicrophone?
+    var UGSource: AKAudioFile?
     var iterateFileIR: AKAudioFile?
     var tape : AKAudioFile?
     var player : AKAudioPlayer?
@@ -30,12 +35,14 @@ class Processer {
     var booster : AKBooster?
     var normalizedIR : AKAudioFile?
     var selectedIteration : Int = 1
+    var useUGSource : Bool = false
     
     init(){
         
         AKAudioFile.cleanTempDirectory()
         AKSettings.bufferLength = .veryLong
         AKSettings.playbackWhileMuted = true
+        AKSettings.audioInputEnabled = true
         
         try? AKSettings.setSession(category: .playAndRecord, with: .defaultToSpeaker)
         
@@ -55,8 +62,14 @@ class Processer {
                 
                 AudioKit.stop()
                 self.urlOfIR = Bundle.main.url(forResource: "grange", withExtension: "wav")!
-                
-                self.player = self.sourceFile?.player
+                if(self.useUGSource){
+                    self.player = self.UGSource?.player
+                    print("Hi")
+                }
+                else{
+                    self.player = self.sourceFile?.player
+                }
+                print(self.player)
                 self.recordMixer = AKMixer(self.player!)
                 self.IR = try? AKAudioFile(readFileName: "grange.wav", baseDir: .resources)
                 if(self.IR?.maxLevel == Float.leastNormalMagnitude)
@@ -118,14 +131,22 @@ class Processer {
                 
                 self.convolvedOutput = AKConvolution(self.player!, impulseResponseFileURL: self.IRPlayer[(self.numberOfIterations-1)]!.audioFile.url)
                 self.convolveMixer = AKMixer(self.convolvedOutput!)
+                self.micSource = AKMicrophone()
+                self.micMixer = AKMixer(self.micSource)
+                self.micBooster = AKBooster(self.micMixer)
+                self.micBooster!.gain = 0
                 
-                self.recordMixer = AKMixer(self.convolveMixer)
+                self.recordMixer = AKMixer(self.convolveMixer, self.micMixer!)
                 self.tape = try? AKAudioFile(name:"output")
+                self.UGSource = try? AKAudioFile(name:"newSource")
                 AudioKit.output = self.recordMixer
                 AudioKit.start()
                 
                 self.convolvedOutput!.start()
                 self.recorder = try? AKNodeRecorder(node: self.convolveMixer, file: self.tape!)
+                self.sourceRecorder = try? AKNodeRecorder(node: self.micMixer, file: self.UGSource!)
+                
+                
                 
                 DispatchQueue.main.async {
                           print("This is run on the main queue, after the previous code in outer block")
@@ -173,6 +194,52 @@ class Processer {
             
         }
     }
+    
+    func sourceRecord(){
+        if(sourceRecorder!.isRecording){
+            sourceRecorder?.stop()
+            
+            print("Finished Recording")
+            useUGSource = true
+            UGSource!.player?.audioFile.exportAsynchronously(name: "new_source.caf", baseDir: .documents, exportFormat: .caf) {_, error in
+                print("Writing the output file")
+                if error != nil {
+                    print("Export Failed \(error)")
+                } else {
+                    print("Export succeeded")
+                }
+            }
+           
+            //update(completion: { (result) -> Void in
+            //    print("Reloading IR and Source")
+            //})
+            sourceFile = UGSource
+            loadSelectedIteration()
+
+            
+        }
+        else {
+            
+            
+            //AudioKit.stop()
+            //AudioKit.output = micMixer
+            //AudioKit.start()
+            sourceRecorder = try? AKNodeRecorder(node: micMixer, file: UGSource!)
+            do{
+                try sourceRecorder?.reset()
+            } catch { print("Couldn't reset recording buffer")}
+            
+            do {
+                
+                try sourceRecorder?.record()
+                
+                
+            } catch { print("Error Recording") }
+            print("Recording Started")
+            
+        }
+    }
+
     
     func play(){
     
