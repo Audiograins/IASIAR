@@ -22,6 +22,7 @@ class Processer {
     var micBooster: AKBooster?
     var micSource: AKMicrophone?
     var UGSource: AKAudioFile?
+    var UGIR: AKAudioFile?
     var iterateFileIR: AKAudioFile?
     var tape : AKAudioFile?
     var player : AKAudioPlayer?
@@ -37,6 +38,8 @@ class Processer {
     var normalizedIR : AKAudioFile?
     var selectedIteration : Int = 1
     var useUGSource : Bool = false
+    var useUGIR : Bool = false
+
     
     init(){
         
@@ -49,7 +52,10 @@ class Processer {
         
         sourceFile = try? AKAudioFile(readFileName: "Sitting.wav", baseDir: .resources)
         urlOfIR = Bundle.main.url(forResource: "grange", withExtension: "wav")!
-        
+        UGIR = try? AKAudioFile(name:"newIR")
+        UGSource = try? AKAudioFile(name:"newSource")
+        IRRecorder = try? AKNodeRecorder(node: micMixer, file: UGIR!)
+        sourceRecorder = try? AKNodeRecorder(node: micMixer, file: UGSource!)
         
     }
 
@@ -62,7 +68,7 @@ class Processer {
                 
                 
                 AudioKit.stop()
-                if(self.useUGSource)
+                if(self.useUGIR)
                 {
                     self.urlOfIR = self.IR?.url
                 }
@@ -75,7 +81,7 @@ class Processer {
                 print(self.player)
                 self.recordMixer = AKMixer(self.player!)
                 print(self.IR)
-                if(!self.useUGSource)
+                if(!self.useUGIR)
                 {
                     self.IR = try? AKAudioFile(readFileName: "grange.wav", baseDir: .resources)
                     print(self.IR)
@@ -147,15 +153,16 @@ class Processer {
                 
                 self.recordMixer = AKMixer(self.convolveMixer, self.micMixer!)
                 self.tape = try? AKAudioFile(name:"output")
-                self.UGSource = try? AKAudioFile(name:"newSource")
+                
+
                 AudioKit.output = self.recordMixer
                 AudioKit.start()
                 
                 self.convolvedOutput!.start()
                 self.recorder = try? AKNodeRecorder(node: self.convolveMixer, file: self.tape!)
-                self.sourceRecorder = try? AKNodeRecorder(node: self.micMixer, file: self.UGSource!)
-                self.IRRecorder = try? AKNodeRecorder(node: self.micMixer, file: self.UGSource!)
-
+                
+                
+                
                 
                 
                 
@@ -236,6 +243,7 @@ class Processer {
             //AudioKit.stop()
             //AudioKit.output = micMixer
             //AudioKit.start()
+            UGSource = try? AKAudioFile(name:"newSource")
             sourceRecorder = try? AKNodeRecorder(node: micMixer, file: UGSource!)
             do{
                 try sourceRecorder?.reset()
@@ -251,13 +259,14 @@ class Processer {
             
         }
     }
+    
     func IRRecord(){
         if(IRRecorder!.isRecording){
             IRRecorder?.stop()
             
             print("Finished Recording")
-            useUGSource = true
-            UGSource!.player?.audioFile.exportAsynchronously(name: "new_IR.caf", baseDir: .documents, exportFormat: .caf) {_, error in
+            useUGIR = true
+            UGIR!.player?.audioFile.exportAsynchronously(name: "new_IR.caf", baseDir: .documents, exportFormat: .caf) {_, error in
                 print("Writing the output file")
                 if error != nil {
                     print("Export Failed \(error)")
@@ -266,7 +275,7 @@ class Processer {
                 }
             }
            
-            IR = UGSource
+            IR = UGIR
             update(completion: { (result) -> Void in
                 print("Reloading IR and Source")
             })
@@ -281,7 +290,8 @@ class Processer {
             //AudioKit.stop()
             //AudioKit.output = micMixer
             //AudioKit.start()
-            IRRecorder = try? AKNodeRecorder(node: micMixer, file: UGSource!)
+            UGIR = try? AKAudioFile(name:"newIR")
+            IRRecorder = try? AKNodeRecorder(node: micMixer, file: UGIR!)
             do{
                 try IRRecorder?.reset()
             } catch { print("Couldn't reset recording buffer")}
