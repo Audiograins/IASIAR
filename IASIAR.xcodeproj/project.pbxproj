@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		910429A41F21597300A48409 /* AudioGrains_Favicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 910429A31F21597300A48409 /* AudioGrains_Favicon.png */; };
 		910429A81F215BF100A48409 /* audiograins-logo1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 910429A71F215BF100A48409 /* audiograins-logo1@2x.png */; };
 		912DD15A1EB2502D001E547D /* processer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912DD1591EB2502D001E547D /* processer.swift */; };
 		914D44951E1D6F6100D3B81A /* Sitting.wav in Resources */ = {isa = PBXBuildFile; fileRef = 914D44941E1D6F6100D3B81A /* Sitting.wav */; };
@@ -62,7 +61,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		910429A31F21597300A48409 /* AudioGrains_Favicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AudioGrains_Favicon.png; path = ../../../../AudioGrains_Favicon.png; sourceTree = "<group>"; };
 		910429A71F215BF100A48409 /* audiograins-logo1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "audiograins-logo1@2x.png"; path = "../../../../audiograins-logo1@2x.png"; sourceTree = "<group>"; };
 		912DD1591EB2502D001E547D /* processer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = processer.swift; sourceTree = "<group>"; };
 		914D44941E1D6F6100D3B81A /* Sitting.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sitting.wav; sourceTree = "<group>"; };
@@ -120,7 +118,6 @@
 			isa = PBXGroup;
 			children = (
 				910429A71F215BF100A48409 /* audiograins-logo1@2x.png */,
-				910429A31F21597300A48409 /* AudioGrains_Favicon.png */,
 				91E1B7811EA7E6BD0037103C /* grange.wav */,
 				914D44941E1D6F6100D3B81A /* Sitting.wav */,
 				917810E41EA580A900092E8D /* IR.wav */,
@@ -221,7 +218,6 @@
 				914D44951E1D6F6100D3B81A /* Sitting.wav in Resources */,
 				91E2D76B1E1C74E3002CC300 /* Assets.xcassets in Resources */,
 				91E2D7691E1C74E3002CC300 /* Main.storyboard in Resources */,
-				910429A41F21597300A48409 /* AudioGrains_Favicon.png in Resources */,
 				910429A81F215BF100A48409 /* audiograins-logo1@2x.png in Resources */,
 				917810E31EA580A600092E8D /* ir_1_C_1.wav in Resources */,
 				917810E51EA580A900092E8D /* IR.wav in Resources */,
